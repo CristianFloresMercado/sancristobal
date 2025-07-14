@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('touristsites', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->text('resumen')->nullable();
+            $table->mediumText('resumen')->nullable();
             $table->string('imagen_destacada')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->boolean('publicado')->default(false);

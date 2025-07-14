@@ -9,4 +9,8 @@ class News extends Model
 {
     /** @use HasFactory<\Database\Factories\NewsFactory> */
     use HasFactory;
+    protected $fillable = [
+        'titulo',
+        
+    ];
 }

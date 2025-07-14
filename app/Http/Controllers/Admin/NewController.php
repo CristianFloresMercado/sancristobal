@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\News;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class NewController extends Controller
@@ -22,7 +23,7 @@ class NewController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.news.create');
     }
 
     /**
@@ -30,7 +31,14 @@ class NewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+        ]); 
+        $new = new News();
+        $new->titulo = $request->titulo;
+        $new->user_id = Auth::id(); // <- Aquí se obtiene el ID del usuario en sesión
+        $new->save();
+        return redirect()->route('admin.news.index');
     }
 
     /**
