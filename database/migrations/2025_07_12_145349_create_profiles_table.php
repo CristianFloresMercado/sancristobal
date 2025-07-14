@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('telefono_emergencia')->nullable();
             $table->text('horarios_atencion')->nullable();
             $table->json('enlaces_utiles')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

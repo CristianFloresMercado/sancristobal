@@ -6,9 +6,26 @@
                 'icon' => 'home',
                 'url' => route('dashboard'),
                 'current' => request()->routeIs('dashboard'),
-            ]
-
-        ]
+            ],
+            [
+                'name' => 'Noticias',
+                'icon' => 'newspaper',
+                'url' => route('admin.news.index'),
+                'current' => request()->routeIs('admin.news.*'),
+            ],
+            [
+                'name' => 'Historia',
+                'icon' => 'academic-cap',
+                'url' => route('admin.news.index'),
+                'current' => request()->routeIs('admin.news.*'),
+            ],
+            [
+                'name' => 'Turismo',
+                'icon' => 'globe-europe-africa',
+                'url' => route('admin.news.index'),
+                'current' => request()->routeIs('admin.news.*'),
+            ],
+        ],
     ]
 @endphp
 
@@ -29,7 +46,6 @@
                 @foreach ($groups as $group => $links)
                     <flux:navlist.group :heading="$group" class="grid">
                         @foreach ($links as $link)
-                            <flux:navlist.item :icon="$link['icon']" :href="$link['url']" :current="$link['current']" wire:navigate>{{ $link['name'] }}</flux:navlist.item>
                             <flux:navlist.item :icon="$link['icon']" :href="$link['url']" :current="$link['current']" wire:navigate>{{ $link['name'] }}</flux:navlist.item>
                         @endforeach
                         

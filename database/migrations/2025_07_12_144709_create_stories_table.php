@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('stories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('content_id')->constrained('contents')->onDelete('cascade');
+            $table->string('titulo');
+            $table->text('resumen')->nullable();
+            $table->string('imagen_destacada')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->boolean('publicado')->default(false);
             $table->integer('año_ocurrido')->nullable();
             $table->string('personajes')->nullable();
-            $table->text('contexto')->nullable();
             $table->timestamps();
         });
     }
