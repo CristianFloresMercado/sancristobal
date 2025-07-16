@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\News;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NewController extends Controller
 {
@@ -33,7 +34,15 @@ class NewController extends Controller
     {
         $request->validate([
             'titulo' => 'required|string|max:255',
+
+            'image' => 'nullable|image',
         ]); 
+        if ($request->hasFile('image')){
+            Storage::put('news',$request->image);
+        }
+
+
+
         $new = new News();
         $new->titulo = $request->titulo;
         $new->user_id = Auth::id(); // <- Aquí se obtiene el ID del usuario en sesión

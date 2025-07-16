@@ -4,7 +4,7 @@
         <flux:breadcrumbs.item :href="route('admin.news.index')">Noticias</flux:breadcrumbs.item>
         <flux:breadcrumbs.item>Noticias</flux:breadcrumbs.item>
     </flux:breadcrumbs>
-    <form action="{{ route('admin.news.store') }}" method="POST">
+    <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="card">
             <div class="relative">
