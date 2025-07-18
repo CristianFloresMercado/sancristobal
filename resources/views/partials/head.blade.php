@@ -9,6 +9,11 @@
 
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@vite(['resources/css/app.css' , 'resources/js/app.js',
+    'public/Backend/assets/css/bootstrap.min.css', 'public/Backend/assets/css/bootstrap-extended.css',
+    'public/Backend/assets/css/app.css', 'public/Backend/assets/css/icons.css',
+    ])
 
-@vite(['resources/css/app.css', 'resources/js/app.js'])
 @fluxAppearance

@@ -34,19 +34,37 @@ class NewController extends Controller
     {
         $request->validate([
             'titulo' => 'required|string|max:255',
-
+            'autor' => 'nullable|string|max:255',
+            'fuente' => 'nullable|string|max:255',
             'image' => 'nullable|image',
+            'resumen' => 'required|string|min:20',
+            'publicado' => 'required|in:0,1'
         ]); 
         if ($request->hasFile('image')){
-            Storage::put('news',$request->image);
+            $img = Storage::put('news',$request->image);
         }
-
-
-
+        else{
+            $img = null;
+        }
+       
         $new = new News();
         $new->titulo = $request->titulo;
+        $new->resumen = $request->resumen;
+        $new->autor = $request->autor;
+        $new->fuente = $request->fuente;
+        $new->imagen_destacada = $img;
+        $new->publicado = $request->publicado;
         $new->user_id = Auth::id(); // <- Aquí se obtiene el ID del usuario en sesión
         $new->save();
+
+
+        //Mensaje de alerta 
+        session()->flash('swal',[
+            'icon' => 'success',
+            'title' => '!Bien hecho!',
+            'text' => 'La noticia se ha creado correctamente'
+        ]);
+        //fin de mensaje de alerta
         return redirect()->route('admin.news.index');
     }
 

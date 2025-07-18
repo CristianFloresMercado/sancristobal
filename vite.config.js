@@ -13,6 +13,6 @@ export default defineConfig({
         tailwindcss(),
     ],
     server: {
-        cors: true,
+        cors: true,         // Puedes cambiarlo si está en uso
     },
 });

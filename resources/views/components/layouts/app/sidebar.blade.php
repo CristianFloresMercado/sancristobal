@@ -155,6 +155,12 @@
 
         {{ $slot }}
 
+        @if (session('swal'))
+            <script>
+                Swal.fire(@json(session('swal')));
+            </script>
+        @endif
+        
         @fluxScripts
     </body>
 </html>

@@ -18,12 +18,35 @@
                 </div>
             </div>
 
-            <flux:input label="Titulo" name="titulo" value="{{old('titulo')}}" placeholder="Agrege el titulo"  class="mb-4"/>
-            <flux:input label="Autor" name="autor" placeholder="Agrege el titulo" class="mb-4" />
-            <flux:input label="Fuente" name="fuente" placeholder="Agrege el titulo" class="mb-4" />
-            <flux:textarea label="Resumen"
-                placeholder="El dia 28 de julio del 2025 se presento la pagina web de la comunidad de San Cristobal" />
-            <div class="flex justify-center">
+            <flux:input label="Titulo" name="titulo" value="{{ old('titulo') }}" placeholder="Agrege el titulo"
+                class="mb-4" />
+            <flux:input label="Autor" name="autor" placeholder="Agrege el autor" class="mb-4" />
+            <flux:input label="Fuente" name="fuente" placeholder="Agrege la fuente" class="mb-4" />
+            <flux:textarea label="Resumen" name="resumen" placeholder="El dia 28 de julio del 2025 se presento la pagina web de la comunidad de San Cristobal" class="mb-4" />
+            @error('resumen')
+                <div class="text-red-600 text-sm mt-1">
+                    {{ $message }}
+                </div>
+            @enderror
+            <div class="mb-4">
+                <flux:label>¿Publicado?</flux:label>
+                <div class="flex gap-6">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="publicado" value="1"
+                            class="text-blue-600 focus:ring-blue-500 border-gray-300" >
+                        <span class="ml-2 text-gray-700">Sí</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="publicado" value="0"
+                            class="text-red-600 focus:ring-red-500 border-gray-300" checked>
+                        <span class="ml-2 text-gray-700">No</span>
+                    </label>
+                </div>
+            </div>
+
+
+
+            <div class="flex justify-end">
                 <flux:button variant="primary" type="submit" color="red">Enviar</flux:button>
             </div>
 
@@ -31,4 +54,3 @@
     </form>
 
 </x-layouts.app>
-                        

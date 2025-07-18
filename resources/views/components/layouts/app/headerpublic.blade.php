@@ -17,7 +17,7 @@
                                 <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i
                                         class="la la-phone mr-1"></i><a href="tel:00123456789"> (00) 74530416</a></li>
                                 <li class="d-flex align-items-center"><i class="la la-envelope-o mr-1"></i><a
-                                        href="mailto:contact@aduca.com"> contacto@techservicetsu@gmail.com</a></li>
+                                        href="https://workspace.google.com/intl/es-419/gmail/"> contacto techservicetsu@gmail.com</a></li>
                             </ul>
                         </div><!-- end header-widget -->
                     </div><!-- end col-lg-6 -->
@@ -81,7 +81,7 @@
                         <div class="col-lg-2">
                             <div class="logo-box">
                                 <a href="index.html" class="logo"><img
-                                        src="resources/css/FrontendTheme/images/logo.png" alt="logo"></a>
+                                        src="/Frontend/images/logomdr.png" alt="logo"></a>
                                 <div class="user-btn-action">
                                     <div class="search-menu-toggle icon-element icon-element-sm shadow-sm mr-2"
                                         data-toggle="tooltip" data-placement="top" title="Search">

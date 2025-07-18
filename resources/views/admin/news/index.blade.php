@@ -22,13 +22,13 @@
                         Resumen
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Autor
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Fuente
-                    </th>
-                    <th scope="col" class="px-6 py-3">
                         Imagen
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Estado
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Opciones
                     </th>
                 </tr>
             </thead>
@@ -42,11 +42,28 @@
                             {{$item->titulo}}
                         </td>
                         <td class="px-6 py-4">
-                            Accessories
+                            {{$item->resumen}}
                         </td>
                         <td class="px-6 py-4">
-                            $99
+                            {{$item->imagen_destacada}}
                         </td>
+                        <td class="px-6 py-4">
+                            @if ($item->publicado == 1)
+                                publicado
+                                @else
+                                sin publicar
+                            @endif
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex space-x-2">
+                                <button type="button" class="btn btn-primary px-4 py-2 radius-30">Actualizar</button>
+                                <button type="button" class="btn btn-warning px-4 py-2 radius-30">Ver</button>
+                                <button type="button" class="btn btn-danger px-4 py-2 radius-30">Eliminar</button>
+                            </div>
+                        </td>
+
+                       
+
                     </tr>
                 @endforeach     
                 
