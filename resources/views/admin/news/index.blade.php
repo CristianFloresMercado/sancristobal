@@ -45,20 +45,20 @@
                             {{$item->resumen}}
                         </td>
                         <td class="px-6 py-4">
-                            {{$item->imagen_destacada}}
+                            <img src="{{ Storage::url($item->imagen_destacada) }}" alt="Imagen destacada">
                         </td>
                         <td class="px-6 py-4">
                             @if ($item->publicado == 1)
-                                publicado
-                                @else
-                                sin publicar
+                                <i class="fadeIn animated bx bx-message-square-check"></i>
+                            @else
+                                <i class="fadeIn animated bx bx-message-square-x"></i>
                             @endif
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex space-x-2">
-                                <button type="button" class="btn btn-primary px-4 py-2 radius-30">Actualizar</button>
-                                <button type="button" class="btn btn-warning px-4 py-2 radius-30">Ver</button>
-                                <button type="button" class="btn btn-danger px-4 py-2 radius-30">Eliminar</button>
+                                <i class="btn btn-primary fadeIn animated bx bx-message-square-edit"></i>
+                                <i class="btn btn-warning lni lni-eye"></i>
+                                <i class="btn btn-danger lni lni-eraser"></i>
                             </div>
                         </td>
 

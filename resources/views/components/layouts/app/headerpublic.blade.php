@@ -59,10 +59,10 @@
                                             <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray">
                                                 <i class="la la-sign-in mr-1"></i><a href="{{ route('login') }}"> Login</a>
                                             </li>
-                                            @if (Route::has('register'))
+                                            {{--@if (Route::has('register'))
                                                 <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a
                                                         href="{{ route('register') }}"> Registrarse</a></li>
-                                            @endif
+                                            @endif--}}
                                         @endauth
                                     </nav>
                                 @endif
@@ -109,11 +109,10 @@
                                 <nav class="main-menu">
                                     <ul>
                                         <li>
-                                            <a href="#">Principal <i class="la la-angle-down fs-12"></i></a>
-                                            <a href="#">Turismo<i class="la la-angle-down fs-12"></i></a>
-                                            <a href="#">Noticias <i class="la la-angle-down fs-12"></i></a>
-                                            <a href="#">Historia <i class="la la-angle-down fs-12"></i></a>
-                                            <a href="#">Home <i class="la la-angle-down fs-12"></i></a>
+                                            <a href="{{ route('home') }}">Principal <i class="pl-3 fs-12"></i></a>
+                                            <a href="{{ route('turismo') }}">Turismo<i class="pl-3 fs-12"></i></a>
+                                            <a href="{{ route('noticias') }}">Noticias <i class="pl-3 fs-12"></i></a>
+                                            <a href="{{ route('historia') }}">Historia <i class="pl-3 fs-12"></i></a>
                                         </li>
                                     </ul><!-- end ul -->
                                 </nav><!-- end main-menu -->
@@ -133,11 +132,10 @@
             </div><!-- end off-canvas-menu-close -->
             <ul class="generic-list-item off-canvas-menu-list pt-90px">
                 <li>
-                    <a href="#">Home</a>
-                    <ul class="sub-menu">
-                        <li><a href="index.html">Home One</a></li>
-                        <li><a href="home-2.html">Home Two</a></li>
-                    </ul>
+                    <a href="{{ route('home') }}">Principal</a>
+                    <a href="{{ route('turismo') }}">Turismo</a>
+                    <a href="{{ route('noticias') }}">Noticias</a>
+                    <a href="{{ route('historia') }}">Historia</a>
                 </li>
             </ul>
         </div><!-- end off-canvas-menu -->
@@ -159,78 +157,7 @@
         </div><!-- end mobile-search-form -->
     </header><!-- end header-menu-area -->
 
-    <section class="hero-area">
-        <div class="hero-slider owl-action-styled">
-            <div class=" "
-                style="background-image: url('https://boliviatravelsite.com/Images/Attractionphotos/san-cristobal-01.jpg'); background-size: cover; background-position: center;">
-
-                <div class="container">
-                    <div class="hero-content">
-                        <div class="section-heading">
-                            <h2 class="section__title text-white fs-65 lh-80 pb-3">We Help You Learn <br> What You Love
-                            </h2>
-                            <p class="section__desc text-white pb-4">Emply dummy text of the printing and typesetting
-                                industry orem Ipsum has been the
-                                <br>industry's standard dummy text ever sinceprinting and typesetting industry.
-                            </p>
-                        </div><!-- end section-heading -->
-                        <div class="hero-btn-box d-flex flex-wrap align-items-center pt-1">
-                            <a href="admission.html" class="btn theme-btn mr-4 mb-4">Join with Us <i
-                                    class="la la-arrow-right icon ml-1"></i></a>
-                            <a href="#" class="btn-text video-play-btn mb-4" data-fancybox
-                                data-src="https://www.youtube.com/watch?v=cRXm1p-CNyk">
-                                Watch Preview<i class="la la-play icon-btn ml-2"></i>
-                            </a>
-                        </div><!-- end hero-btn-box -->
-                    </div><!-- end hero-content -->
-                </div><!-- end container -->
-            </div><!-- end hero-slider-item -->
-            <div class="hero-slider-item hero-bg-2">
-                <div class="container">
-                    <div class="hero-content text-center">
-                        <div class="section-heading">
-                            <h2 class="section__title text-white fs-65 lh-80 pb-3">Join Aduca & Get <br> Your Free
-                                Courses!</h2>
-                            <p class="section__desc text-white pb-4">Emply dummy text of the printing and typesetting
-                                industry orem Ipsum has been the
-                                <br>industry's standard dummy text ever sinceprinting and typesetting industry.
-                            </p>
-                        </div><!-- end section-heading -->
-                        <div class="hero-btn-box d-flex flex-wrap align-items-center pt-1 justify-content-center">
-                            <a href="admission.html" class="btn theme-btn mr-4 mb-4">Get Started <i
-                                    class="la la-arrow-right icon ml-1"></i></a>
-                            <a href="#" class="btn-text video-play-btn mb-4" data-fancybox
-                                data-src="https://www.youtube.com/watch?v=cRXm1p-CNyk">
-                                Watch Preview<i class="la la-play icon-btn ml-2"></i>
-                            </a>
-                        </div><!-- end hero-btn-box -->
-                    </div><!-- end hero-content -->
-                </div><!-- container -->
-            </div><!-- end hero-slider-item -->
-            <div class="hero-slider-item hero-bg-3">
-                <div class="container">
-                    <div class="hero-content text-right">
-                        <div class="section-heading">
-                            <h2 class="section__title text-white fs-65 lh-80 pb-3">Learn Anything, <br> Anytime,
-                                Anywhere</h2>
-                            <p class="section__desc text-white pb-4">Emply dummy text of the printing and typesetting
-                                industry orem Ipsum has been the
-                                <br>industry's standard dummy text ever sinceprinting and typesetting industry.
-                            </p>
-                        </div>
-                        <div class="hero-btn-box d-flex flex-wrap align-items-center pt-1 justify-content-end">
-                            <a href="#" class="btn-text video-play-btn mr-4 mb-4" data-fancybox
-                                data-src="https://www.youtube.com/watch?v=cRXm1p-CNyk">
-                                <i class="la la-play icon-btn mr-2"></i>Watch Preview
-                            </a>
-                            <a href="admission.html" class="btn theme-btn mb-4"><i
-                                    class="la la-arrow-left icon mr-1"></i>Get Enrolled </a>
-                        </div><!-- end hero-btn-box -->
-                    </div><!-- end hero-content -->
-                </div><!-- container -->
-            </div><!-- end hero-slider-item -->
-        </div><!-- end hero-slide -->
-    </section><!-- end hero-area -->
+    
     
 
     {{ $slot }}
@@ -240,6 +167,88 @@
     @if (Route::has('login'))
         <div class="h-14.5 hidden lg:block"></div>
     @endif
+
+
+
+<section class="footer-area pt-100px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 responsive-column-half">
+                <div class="footer-item">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="footer logo" class="footer__logo">
+                    </a>
+                    <ul class="generic-list-item pt-4">
+                        <li><a href="tel:+1631237884">+163 123 7884</a></li>
+                        <li><a href="mailto:support@wbsite.com">support@website.com</a></li>
+                        <li>Melbourne, Australia, 105 South Park Avenue</li>
+                    </ul>
+                    <h3 class="fs-20 font-weight-semi-bold pt-4 pb-2">Síguenos en</h3>
+                    <ul class="social-icons social-icons-styled">
+                        <li class="mr-1"><a href="#" class="facebook-bg"><i class="la la-facebook"></i></a></li>
+                        <li class="mr-1"><a href="#" class="twitter-bg"><i class="la la-twitter"></i></a></li>
+                        <li class="mr-1"><a href="#" class="instagram-bg"><i class="la la-instagram"></i></a></li>
+                        <li class="mr-1"><a href="#" class="linkedin-bg"><i class="la la-linkedin"></i></a></li>
+                    </ul>
+                </div><!-- end footer-item -->
+            </div><!-- end col-lg-3 -->
+            <div class="col-lg-3 responsive-column-half">
+                <div class="footer-item">
+                    <h3 class="fs-20 font-weight-semi-bold">Compania</h3>
+                    <span class="section-divider section--divider"></span>
+                    <ul class="generic-list-item">
+                        <li><a href="#">Sobre nosotros</a></li>
+                        <li><a href="#">Contáctanos</a></li>
+                        <li><a href="#">Conviértete en profesor</a></li>
+                        <li><a href="#">Soporte</a></li>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div><!-- end footer-item -->
+            </div><!-- end col-lg-3 -->
+            <div class="col-lg-3 responsive-column-half">
+                <div class="footer-item">
+                    <h3 class="fs-20 font-weight-semi-bold">Cursos</h3>
+                    <span class="section-divider section--divider"></span>
+                    <ul class="generic-list-item">
+                        <li><a href="#">Desarrollo Web</a></li>
+                        <li><a href="#">Hacking</a></li>
+                        <li><a href="#">Aprendizaje de PHP</a></li>
+                        <li><a href="#">Inglés Hablado</a></li>
+                        <li><a href="#">Coche Autónomo</a></li>
+                        <li><a href="#">Recolección de Basura</a></li>
+                    </ul>
+                </div><!-- end footer-item -->
+            </div><!-- end col-lg-3 -->
+            <div class="col-lg-3 responsive-column-half">
+                <div class="footer-item">
+                    <h3 class="fs-20 font-weight-semi-bold">Descargar App</h3>
+                    <span class="section-divider section--divider"></span>
+                    <div class="mobile-app">
+                        <p class="pb-3 lh-24">Descarga nuestra aplicación móvil y aprende sobre la marcha.</p>
+                    </div>
+                </div><!-- end footer-item -->
+            </div><!-- end col-lg-3 -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+    <div class="section-block"></div>
+    <div class="copyright-content py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <p class="copy-desc">&copy; 2025 San Cristobal. Todos los derechos reservados. Por <a href="https://techydevs.com/">TechService</a></p>
+                </div><!-- end col-lg-6 -->
+                <div class="col-lg-6">
+                    
+                </div><!-- end col-lg-6 -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end copyright-content -->
+</section><!-- end footer-area -->
+<!-- ================================
+          END FOOTER AREA
+-->
+
 </body>
 
 </html>
