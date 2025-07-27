@@ -3,35 +3,27 @@
         'Plataforma' => [
             [
                 'name' => 'Dashboard',
-                'icon' => 'home',
+                'icon' => 'home', // 🏠 Dashboard → mantiene
                 'url' => route('dashboard'),
                 'current' => request()->routeIs('dashboard'),
             ],
             [
                 'name' => 'Noticias',
-                'icon' => 'newspaper',
+                'icon' => 'news', // 📰 Noticias → mantiene
                 'url' => route('admin.news.index'),
                 'current' => request()->routeIs('admin.news.*'),
             ],
             [
                 'name' => 'Historia',
-                'icon' => 'academic-cap',
-                'url' => route('admin.news.index'),
-                'current' => request()->routeIs('admin.news.*'),
+                'icon' => 'book-open', // 📖 Historia
+                'url' => route('admin.stories.index'), // <- quizás esta ruta debería cambiar si tienes otra tabla para Historia
+                'current' => request()->routeIs('admin.history.*'),
             ],
             [
                 'name' => 'Turismo',
-                'icon' => 'globe-europe-africa',
-                'url' => route('admin.news.index'),
-                'current' => request()->routeIs('admin.news.*'),
-            ],
-        ],
-        'Configuración' => [
-            [
-                'name' => 'Perfil Comunitario',
-                'icon' => 'academic-cap',
-                'url' => route('dashboard'),
-                'current' => request()->routeIs('dashboard'),
+                'icon' => 'map', // 🗺️ Turismo
+                'url' => route('admin.tourists.index'), // <- ajusta esta ruta si es necesario
+                'current' => request()->routeIs('admin.tourists.*'),
             ],
         ],
     ];
@@ -44,133 +36,240 @@
     @include('partials.head')
 </head>
 
-<body class="min-h-screen bg-white dark:bg-zinc-800">
-    <flux:sidebar sticky stashable class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
-        <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
+<body>
+    <!--wrapper-->
+    <div class="wrapper">
+        <!--sidebar wrapper -->
+        <div class="sidebar-wrapper" data-simplebar="true">
+            <div class="sidebar-header">
+                <div>
+                    <a href="{{ route('home') }}">
+                        <img src="/Frontend/images/logomdr.png" alt="logo icon">
+                    </a>
+                </div>
 
-        <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
-            <x-app-logo />
-        </a>
-
-        <flux:navlist variant="outline">
-            @foreach ($groups as $group => $links)
-                <flux:navlist.group :heading="$group" class="grid">
-                    @foreach ($links as $link)
-                        <flux:navlist.item :icon="$link['icon']" :href="$link['url']" :current="$link['current']"
-                            wire:navigate>{{ $link['name'] }}</flux:navlist.item>
+                <div class="toggle-icon ms-auto"><i class='bx bx-arrow-back'></i>
+                </div>
+            </div>
+            <!--navigation-->
+            <ul class="metismenu" id="menu">
+                @foreach ($groups as $group => $items)
+                    <li class="menu-label">{{ $group }}</li>
+                    @foreach ($items as $item)
+                        <li>
+                            <a href="{{ $item['url'] }}" class="{{ $item['current'] ? 'active' : '' }}">
+                                <div class="parent-icon"><i class='bx bx-{{ $item['icon'] }}'></i>
+                                </div>
+                                <div class="menu-title">{{ $item['name'] }}</div>
+                            </a>
+                        </li>
                     @endforeach
-
-                </flux:navlist.group>
-            @endforeach
-
-        </flux:navlist>
-        <flux:spacer />
+                @endforeach
 
 
-
-
-
-
-
-        <!-- Desktop User Menu -->
-        <flux:dropdown class="hidden lg:block" position="bottom" align="start">
-            <flux:profile :name="auth()->user()->name" :initials="auth()->user()->initials()"
-                icon:trailing="chevrons-up-down" />
-
-            <flux:menu class="w-[220px]">
-                <flux:menu.radio.group>
-                    <div class="p-0 text-sm font-normal">
-                        <div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
-                            <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
-                                <span
-                                    class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
-                                    {{ auth()->user()->initials() }}
-                                </span>
-                            </span>
-
-                            <div class="grid flex-1 text-start text-sm leading-tight">
-                                <span class="truncate font-semibold">{{ auth()->user()->name }}</span>
-                                <span class="truncate text-xs">{{ auth()->user()->email }}</span>
-                            </div>
-                        </div>
+            </ul>
+            <!--end navigation-->
+        </div>
+        <!--end sidebar wrapper -->
+        <!--start header -->
+        <header>
+            <div class="topbar d-flex align-items-center">
+                <nav class="navbar navbar-expand gap-3">
+                    <div class="mobile-toggle-menu"><i class='bx bx-menu'></i>
                     </div>
-                </flux:menu.radio.group>
 
-                <flux:menu.separator />
-
-                <flux:menu.radio.group>
-                    <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>
-                        {{ __('Configuración') }}</flux:menu.item>
-                </flux:menu.radio.group>
-
-                <flux:menu.separator />
-
-                <form method="POST" action="{{ route('logout') }}" class="w-full">
-                    @csrf
-                    <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
-                        {{ __('Log Out') }}
-                    </flux:menu.item>
-                </form>
-            </flux:menu>
-        </flux:dropdown>
-    </flux:sidebar>
-
-    <!-- Mobile User Menu -->
-    <flux:header class="lg:hidden">
-        <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
-
-        <flux:spacer />
-
-        <flux:dropdown position="top" align="end">
-            <flux:profile :initials="auth()->user()->initials()" icon-trailing="chevron-down" />
-
-            <flux:menu>
-                <flux:menu.radio.group>
-                    <div class="p-0 text-sm font-normal">
-                        <div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
-                            <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
-                                <span
-                                    class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
-                                    {{ auth()->user()->initials() }}
-                                </span>
-                            </span>
-
-                            <div class="grid flex-1 text-start text-sm leading-tight">
-                                <span class="truncate font-semibold">{{ auth()->user()->name }}</span>
-                                <span class="truncate text-xs">{{ auth()->user()->email }}</span>
-                            </div>
-                        </div>
+                    <div class="position-relative search-bar d-lg-block d-none" data-bs-toggle="modal"
+                        data-bs-target="#SearchModal">
+                        <input class="form-control px-5" disabled type="search" placeholder="Search">
+                        <span
+                            class="position-absolute top-50 search-show ms-3 translate-middle-y start-0 top-50 fs-5"><i
+                                class='bx bx-search'></i></span>
                     </div>
-                </flux:menu.radio.group>
 
-                <flux:menu.separator />
 
-                <flux:menu.radio.group>
-                    <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>
-                        {{ __('Configuración') }}</flux:menu.item>
-                </flux:menu.radio.group>
+                    <div class="top-menu ms-auto">
+                        <ul class="navbar-nav align-items-center gap-1">
+                            <li class="nav-item mobile-search-icon d-flex d-lg-none" data-bs-toggle="modal"
+                                data-bs-target="#SearchModal">
+                                <a class="nav-link" href="avascript:;"><i class='bx bx-search'></i>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown dropdown-laungauge d-none d-sm-flex">
+                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="avascript:;"
+                                    data-bs-toggle="dropdown"><img src="assets/images/county/02.png" width="22"
+                                        alt="">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
+                                                src="assets/images/county/01.png" width="20" alt=""><span
+                                                class="ms-2">English</span></a>
+                                    </li>
+                                    <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
+                                                src="assets/images/county/02.png" width="20" alt=""><span
+                                                class="ms-2">Catalan</span></a>
+                                    </li>
+                                    <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
+                                                src="assets/images/county/03.png" width="20" alt=""><span
+                                                class="ms-2">French</span></a>
+                                    </li>
+                                    <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
+                                                src="assets/images/county/04.png" width="20" alt=""><span
+                                                class="ms-2">Belize</span></a>
+                                    </li>
+                                    <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
+                                                src="assets/images/county/05.png" width="20" alt=""><span
+                                                class="ms-2">Colombia</span></a>
+                                    </li>
+                                    <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
+                                                src="assets/images/county/06.png" width="20" alt=""><span
+                                                class="ms-2">Spanish</span></a>
+                                    </li>
+                                    <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
+                                                src="assets/images/county/07.png" width="20" alt=""><span
+                                                class="ms-2">Georgian</span></a>
+                                    </li>
+                                    <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
+                                                src="assets/images/county/08.png" width="20" alt=""><span
+                                                class="ms-2">Hindi</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dark-mode d-none d-sm-flex">
+                                <a class="nav-link dark-mode-icon" href="javascript:;"><i class='bx bx-moon'></i>
+                                </a>
+                            </li>
 
-                <flux:menu.separator />
+                            <li class="nav-item dropdown dropdown-app">
+                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown"
+                                    href="javascript:;"><i class='bx bx-grid-alt'></i></a>
+                                <div class="dropdown-menu dropdown-menu-end p-0">
+                                    <div class="app-container p-2 my-2">
+                                        <div class="row gx-0 gy-2 row-cols-3 justify-content-center p-2">
 
-                <form method="POST" action="{{ route('logout') }}" class="w-full">
-                    @csrf
-                    <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
-                        {{ __('Cerrar sesion') }}
-                    </flux:menu.item>
-                </form>
-            </flux:menu>
-        </flux:dropdown>
-    </flux:header>
+                                            // aqui se puede poner columnas de aplicaciones
 
-    {{ $slot }}
+                                        </div><!--end row-->
 
-    @if (session('swal'))
-        <script>
-            Swal.fire(@json(session('swal')));
-        </script>
-    @endif
+                                    </div>
+                                </div>
+                            </li>
 
-    @fluxScripts
+                            <li class="nav-item dropdown dropdown-large">
+                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative"
+                                    href="#" data-bs-toggle="dropdown"><span class="alert-count">7</span>
+                                    <i class='bx bx-bell'></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+
+                                    <div class="header-notifications-list">
+
+                                        <a class="dropdown-item" href="javascript:;">
+                                            <div class="d-flex align-items-center">
+                                                <div class="user-online">
+                                                    <img src="{{ asset('Backend/assets/images/avatars/avatar-8.png') }}"
+                                                        class="msg-avatar" alt="user avatar">
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="msg-name">Pedro Valencia <span
+                                                            class="msg-time float-end">6 hrs
+                                                            atras</span></h6>
+                                                    <p class="msg-info">Se popularizó en la década de 1960</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <a href="javascript:;">
+                                        <div class="text-center msg-footer">
+                                            <button class="btn btn-primary w-100">Ver todas las
+                                                notificaciones|</button>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown dropdown-large">
+                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative"
+                                    href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="alert-count">8</span>
+                                    <i class='bx bx-shopping-bag'></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+
+                                    <div class="header-message-list">
+
+
+                                    </div>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="user-box dropdown px-3">
+                        <a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret"
+                            href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{{ asset('Backend/assets/images/avatars/avatar-1.png') }}" class="user-img"
+                                alt="user avatar">
+                            <div class="user-info">
+                                <p class="user-name mb-0">{{ auth()->user()->name }}
+                                    ({{ auth()->user()->initials() }})</p>
+                                <p class="designattion mb-0">Administrador</p>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            </li>
+                            <li><a class="dropdown-item d-flex align-items-center"
+                                    href="{{ route('settings.profile') }}"><i
+                                        class="bx bx-cog fs-5"></i><span>Configuración</span></a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="bx bx-log-out-circle"></i>
+                                    <span>Cerrar sesión</span>
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        {{ $slot }}
+
+        @if (session('swal'))
+            <script>
+                Swal.fire(@json(session('swal')));
+            </script>
+        @endif
+
+        @fluxScripts
+
+
+
+        <div class="overlay toggle-icon"></div>
+        <!--end overlay-->
+        <!--Start Back To Top Button-->
+        <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+        <!--End Back To Top Button-->
+        <footer class="page-footer">
+            <p class="mb-0">Copyright © 2025 todos los derechos reservados</p>
+        </footer>
+    </div>
+    <!--end wrapper-->
+
+
+
+
+
+
+
+
 </body>
+
+
 
 </html>

@@ -11,6 +11,12 @@ class News extends Model
     use HasFactory;
     protected $fillable = [
         'titulo',
+        'resumen',
+        'autor',
+        'fuente',
+        'imagen_destacada',
+        'publicado',
+        'user_id',
         
     ];
 }

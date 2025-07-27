@@ -15,7 +15,8 @@ class NewController extends Controller
      */
     public function index()
     {
-        $news = News::all();
+        $news = News::orderByDesc('id')->get();
+
         return view('admin.news.index', compact('news'));
     }
 
@@ -33,20 +34,21 @@ class NewController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'resumen' => 'required|string|min:20',
+            'publicado' => 'required|in:0,1',
             'titulo' => 'required|string|max:255',
             'autor' => 'nullable|string|max:255',
             'fuente' => 'nullable|string|max:255',
-            'image' => 'nullable|image',
-            'resumen' => 'required|string|min:20',
-            'publicado' => 'required|in:0,1'
-        ]); 
-        if ($request->hasFile('image')){
-            $img = Storage::put('news',$request->image);
-        }
-        else{
+            'imagen' => 'required|image|dimensions:min_width=450,min_height=350,max_width=450,max_height=350',
+        ], [
+            'imagen.dimensions' => 'La imagen debe tener dimensiones de 450px x 350px',
+        ]);
+        if ($request->hasFile('imagen')) {
+            $img = Storage::put('news', $request->imagen);
+        } else {
             $img = null;
         }
-       
+
         $new = new News();
         $new->titulo = $request->titulo;
         $new->resumen = $request->resumen;
@@ -59,7 +61,7 @@ class NewController extends Controller
 
 
         //Mensaje de alerta 
-        session()->flash('swal',[
+        session()->flash('swal', [
             'icon' => 'success',
             'title' => '!Bien hecho!',
             'text' => 'La noticia se ha creado correctamente'
@@ -73,7 +75,7 @@ class NewController extends Controller
      */
     public function show(News $news)
     {
-        //
+        return response()->json($news);
     }
 
     /**
@@ -81,22 +83,60 @@ class NewController extends Controller
      */
     public function edit(News $news)
     {
-        //
+        $news = News::findOrFail($news->id);
+        return view('admin.news.edit', compact('news'));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, News $news)
-    {
-        //
+{
+    $data = $request->validate([
+        'resumen' => 'required|string|min:20',
+        'publicado' => 'required|in:0,1',
+        'titulo' => 'required|string|max:255',
+        'autor' => 'nullable|string|max:255',
+        'fuente' => 'nullable|string|max:255',
+        'imagen' => 'nullable|image|dimensions:min_width=450,min_height=350,max_width=450,max_height=350',
+    ], [
+        'imagen.dimensions' => 'La imagen debe tener dimensiones de 450px x 350px',
+    ]);
+
+    if ($request->hasFile('imagen')) {
+        // Borra imagen vieja si existe
+        if ($news->imagen_destacada && Storage::disk('public')->exists($news->imagen_destacada)) {
+            Storage::disk('public')->delete($news->imagen_destacada);
+        }
+
+        // Guarda nueva imagen
+        $path = $request->file('imagen')->store('news', 'public');
+        $data['imagen_destacada'] = $path;
     }
+
+    $news->update($data);
+
+    // Alerta con SweetAlert
+    session()->flash('swal', [
+        'icon' => 'success',
+        'title' => 'Actualizado',
+        'text' => 'La noticia se actualizó correctamente.'
+    ]);
+
+    return redirect()->route('admin.news.index');
+}
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(News $news)
     {
-        //
+        if ($news->imagen_destacada) {
+                Storage::disk('public')->delete($news->imagen_destacada);
+            }
+
+            $news->delete();
+
+            return response()->json(['message' => 'Noticia eliminada exitosamente']);
     }
 }

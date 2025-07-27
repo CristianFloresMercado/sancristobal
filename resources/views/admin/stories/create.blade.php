@@ -2,28 +2,28 @@
     <div class="mb-8">
         <nav class="text-sm text-gray-500 mb-4">
             <a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a> /
-            <a href="{{ route('admin.news.index') }}" class="hover:underline">Noticias</a> /
-            <span class="text-gray-700 font-semibold">Crear noticia</span>
+            <a href="{{ route('admin.stories.index') }}" class="hover:underline">Historias</a> /
+            <span class="text-gray-700 font-semibold">Crear historia</span>
         </nav>
 
         <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md">
-            <h2 class="text-2xl font-bold text-center text-blue-700 mb-6">Nueva Noticia</h2>
+            <h2 class="text-2xl font-bold text-center text-purple-700 mb-6">Nueva Historia</h2>
 
-            <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+            <form action="{{ route('admin.stories.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
 
-                <!-- Vista previa de imagen -->
+                <!-- Imagen destacada -->
                 <div class="flex flex-col items-center gap-2">
                     <img id="preview-image" src="https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg"
                          class="img-fluid rounded border border-secondary shadow-sm"
                         style="width: 450px; height: 350px; object-fit: cover;" alt="Vista previa">
-                    <label class="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow">
+                    <label class="cursor-pointer bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg shadow">
                         Subir Imagen
-                        <input type="file" name="imagen" id="input-image" accept="image/*" class="hidden">
+                        <input type="file" name="imagen_destacada" id="input-image" accept="image/*" class="hidden">
                     </label>
                     <a href="https://www.iloveimg.com/es/redimensionar-imagen" target="_blank"
-                       class="text-sm text-blue-600 hover:underline">Convertir / Redimensionar imagen</a>
-                    @error('imagen')
+                       class="text-sm text-purple-600 hover:underline">Convertir / Redimensionar imagen</a>
+                    @error('imagen_destacada')
                         <p class="text-red-600 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
@@ -31,29 +31,29 @@
                 <!-- Título -->
                 <div>
                     <label class="block text-gray-700 font-medium mb-1">Título</label>
-                    <input type="text" name="titulo" value="{{ old('titulo') }}" placeholder="Ej. Lanzamiento de sitio web"
-                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" name="titulo" value="{{ old('titulo') }}" placeholder="Ej. Batalla del puente"
+                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
                 </div>
 
-                <!-- Autor -->
+                <!-- Año ocurrido -->
                 <div>
-                    <label class="block text-gray-700 font-medium mb-1">Autor</label>
-                    <input type="text" name="autor" value="{{ old('autor') }}" placeholder="Ej. Juan Pérez"
-                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label class="block text-gray-700 font-medium mb-1">Año ocurrido</label>
+                    <input type="number" name="año_ocurrido" value="{{ old('año_ocurrido') }}" placeholder="Ej. 1825"
+                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
                 </div>
 
-                <!-- Fuente -->
+                <!-- Personajes -->
                 <div>
-                    <label class="block text-gray-700 font-medium mb-1">Fuente</label>
-                    <input type="text" name="fuente" value="{{ old('fuente') }}" placeholder="Ej. www.sitio.com"
-                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label class="block text-gray-700 font-medium mb-1">Personajes</label>
+                    <input type="text" name="personajes" value="{{ old('personajes') }}" placeholder="Ej. Juana Azurduy, Simón Bolívar"
+                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
                 </div>
 
                 <!-- Resumen -->
                 <div>
                     <label class="block text-gray-700 font-medium mb-1">Resumen</label>
-                    <textarea name="resumen" rows="4" placeholder="Escribe un resumen breve..."
-                              class="w-full border border-gray-300 rounded-lg px-4 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500">{{ old('resumen') }}</textarea>
+                    <textarea name="resumen" rows="4" placeholder="Escribe un resumen breve de la historia..."
+                              class="w-full border border-gray-300 rounded-lg px-4 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-purple-500">{{ old('resumen') }}</textarea>
                     @error('resumen')
                         <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -64,7 +64,7 @@
                     <label class="block text-gray-700 font-medium mb-2">¿Publicado?</label>
                     <div class="flex items-center gap-8">
                         <label class="flex items-center gap-2">
-                            <input type="radio" name="publicado" value="1" class="text-blue-600 focus:ring-blue-500 border-gray-300">
+                            <input type="radio" name="publicado" value="1" class="text-purple-600 focus:ring-purple-500 border-gray-300">
                             <span class="text-gray-700">Sí</span>
                         </label>
                         <label class="flex items-center gap-2">
@@ -78,7 +78,7 @@
                 <div class="text-end">
                     <button type="submit"
                             class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition duration-300">
-                        Publicar Noticia
+                        Guardar Historia
                     </button>
                 </div>
             </form>

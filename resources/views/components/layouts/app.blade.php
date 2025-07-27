@@ -1,5 +1,11 @@
 <x-layouts.app.sidebar :title="$title ?? null">
-    <flux:main>
-        {{ $slot }}
-    </flux:main>
+    <div class="page-wrapper">
+        <div class="page-content">
+
+            {{ $slot }}
+
+        </div>
+    </div>
+
+
 </x-layouts.app.siderbar>

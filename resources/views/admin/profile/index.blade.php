@@ -2,7 +2,7 @@
     <div class="container mt-5">
         <h2 class="mb-4">Perfil de la Comunidad</h2>
 
-        <form action="{{ route('admin.profile.update', $comunidad->id) }}" method="POST">
+        <form action="{{ route('comunidad.update', $comunidad->id) }}" method="POST">
             @csrf
             @method('PUT')
 

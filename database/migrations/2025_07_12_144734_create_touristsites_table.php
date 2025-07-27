@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('ubicacion');
             $table->string('coordenadas')->nullable(); // ejemplo: "-21.567, -66.123"
             $table->text('horario')->nullable();
-            $table->json('galeria_imagenes')->nullable();
+       
             $table->timestamps();
         });
     }
