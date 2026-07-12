@@ -9,54 +9,40 @@
 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
+<!-- Bootstrap 5 CSS (CDN) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Theme Style CSS -->
-<link href="{{ asset('Backend/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
-<link href="{{ asset('Backend/assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
-<link href="{{ asset('Backend/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
-<link href="{{ asset('Backend/assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
+<!-- Boxicons (CDN) -->
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
-<!-- loader -->
-<link href="{{ asset('Backend/assets/css/pace.min.css') }}" rel="stylesheet" />
-<script src="{{ asset('Backend/assets/js/pace.min.js') }}"></script>
-
-<!-- Bootstrap CSS -->
-<link href="{{ asset('Backend/assets/css/bootstrap.min.css') }}" rel="stylesheet">
-<link href="{{ asset('Backend/assets/css/bootstrap-extended.css') }}" rel="stylesheet">
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-
+<!-- Dexon Theme CSS -->
 <link href="{{ asset('Backend/assets/css/app.css') }}" rel="stylesheet">
 <link href="{{ asset('Backend/assets/css/icons.css') }}" rel="stylesheet">
-
-<!-- Theme Style CSS -->
 <link rel="stylesheet" href="{{ asset('Backend/assets/css/dark-theme.css') }}" />
 <link rel="stylesheet" href="{{ asset('Backend/assets/css/semi-dark.css') }}" />
 <link rel="stylesheet" href="{{ asset('Backend/assets/css/header-colors.css') }}" />
 
-<script src="{{ asset('Backend/assets/js/bootstrap.bundle.min.js') }}"></script>
-<!-- Plugins -->
-<script src="{{ asset('Backend/assets/js/jquery.min.js') }}"></script>
-<script src="{{ asset('Backend/assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
-<script src="{{ asset('Backend/assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
-<script src="{{ asset('Backend/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
-<script src="{{ asset('Backend/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js') }}"></script>
-<script src="{{ asset('Backend/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
-<script src="{{ asset('Backend/assets/plugins/chartjs/js/chart.js') }}"></script>
-<script src="{{ asset('Backend/assets/js/index.js') }}"></script>
+<!-- Simplebar CSS (CDN) -->
+<link href="https://cdn.jsdelivr.net/npm/simplebar@6.0.3/dist/simplebar.min.css" rel="stylesheet">
 
+<!-- Metismenu CSS (CDN) -->
+<link href="https://cdn.jsdelivr.net/npm/metismenujs@1.4.0/dist/metisMenu.min.css" rel="stylesheet">
 
-	
+<!-- jQuery + Bootstrap 5 JS (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- Simplebar JS (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/simplebar@6.0.3/dist/simplebar.min.js"></script>
 
+<!-- Metismenu JS (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/metismenujs@1.4.0/dist/metisMenu.min.js"></script>
 
-
-
-
-
-<!-- App JS -->
+<!-- Dexon App JS -->
 <script src="{{ asset('Backend/assets/js/app.js') }}"></script>
+
+<!-- Chart.js (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
