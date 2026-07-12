@@ -3,83 +3,103 @@
 namespace Database\Factories;
 
 use App\Models\News;
-use App\Models\Stories;
-use App\Models\User;
+use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\News>
- */
 class NewsFactory extends Factory
 {
     protected $model = News::class;
 
     protected $titulos = [
-        'San Cristóbal celebra el aniversario de su fundación',
-        'Nuevas inversiones impulsan la minería local',
-        'Avances tecnológicos llegan a la comunidad',
-        'Evento cultural reúne a toda la región',
-        'Mejoras en infraestructura vial para San Cristóbal',
-        'Campaña de salud pública beneficia a cientos',
-        'Educación ambiental toma protagonismo en escuelas',
-        'Iniciativa turística genera empleo local',
-        'Proyecto de energías renovables en marcha',
-        'Desarrollo social fortalece a familias vulnerables'
+        'San Cristóbal celebra el 150º aniversario de su fundación',
+        'Inician las fiestas patronales en honor a San Cristóbal',
+        'Nuevo programa educativo impulsa la enseñanza bilingüe',
+        'La comunidad minera recibe nuevas inversiones para el desarrollo',
+        'Campaña de vacunación masiva beneficia a cientos de vecinos',
+        'Avanzan obras de mejoramiento vial en la provincia Nor Lípez',
+        'Festival cultural reúne a artistas y artesanos locales',
+        'Bolivia celebra su aniversario con actos cívicos en San Cristóbal',
+        'Proyecto de energías renovables avanza en la región de Potosí',
+        'Escuelas promueven actividades de educación ambiental y reciclaje'
     ];
 
     protected $resumenes = [
-        'La comunidad de San Cristóbal festeja con diversas actividades el aniversario que marca su historia y tradición.',
-        'Importantes empresas han decidido invertir en la minería, generando nuevas oportunidades para la población.',
-        'La llegada de tecnología de punta promete modernizar distintos sectores productivos y educativos.',
-        'Artistas locales y visitantes se reúnen para celebrar la cultura y el arte en un festival anual.',
-        'Las nuevas carreteras y caminos facilitan la movilidad y el comercio dentro y fuera de la comunidad.',
-        'La campaña sanitaria ofrece vacunación y chequeos médicos para mejorar la salud pública.',
-        'Programas educativos fomentan el cuidado del medio ambiente entre niños y jóvenes.',
-        'El turismo sustentable se posiciona como motor económico con impacto positivo en la región.',
-        'Se implementa un plan para desarrollar energía solar y eólica, contribuyendo al cuidado del planeta.',
-        'Organizaciones sociales trabajan para mejorar las condiciones de vida de las familias más necesitadas.'
+        'Con un acto solemne, la población conmemora los 150 años de historia y progreso de San Cristóbal.',
+        'Durante dos semanas, la comunidad se une en festejos religiosos y culturales en honor al santo patrón.',
+        'El gobierno local implementa un programa para fortalecer la educación en quechua y español.',
+        'Importantes empresas invierten en modernizar la infraestructura minera y generar empleo local.',
+        'La jornada sanitaria incluye vacunación contra la influenza y chequeos médicos gratuitos.',
+        'Se están construyendo nuevas vías para mejorar la conectividad y el comercio regional.',
+        'Artesanos y músicos participan en el evento que resalta la riqueza cultural de la zona.',
+        'Actos patrios incluyen desfiles, discursos y actividades educativas en colegios y plazas públicas.',
+        'Se inauguran paneles solares y parques eólicos para contribuir al desarrollo sostenible.',
+        'Los centros educativos promueven talleres y campañas para el cuidado del medio ambiente.'
     ];
 
     protected $autores = [
-        'Redacción San Cristóbal',
-        'Equipo Minero Local',
-        'Tecnología Hoy',
-        'Cultura y Arte',
-        'Infraestructura Regional',
-        'Salud Comunitaria',
-        'Educación Verde',
-        'Turismo Sustentable',
-        'Energías Renovables',
-        'Desarrollo Social'
+        'Redacción Diario Potosí',
+        'Equipo Cultural San Cristóbal',
+        'Ministerio de Educación',
+        'Corporación Minera de Bolivia',
+        'Secretaría de Salud Pública',
+        'Gobierno Municipal Nor Lípez',
+        'Fundación Arte y Cultura',
+        'Instituto Nacional de Historia',
+        'Agencia de Energías Renovables',
+        'Programa Ambiental Escolar'
     ];
 
     protected $fuentes = [
-        'Diario Regional',
-        'Agencia Minera',
-        'Noticias Tecnológicas',
-        'Revista Cultural',
-        'Gobierno Local',
-        'Instituto de Salud',
-        'Ministerio de Educación',
-        'Oficina de Turismo',
-        'Organización Ambiental',
-        'Fundación Social'
+        'Diario Potosí',
+        'Oficina de Cultura San Cristóbal',
+        'Ministerio de Educación Nacional',
+        'Corporación Minera de Bolivia (COMIBOL)',
+        'Secretaría Municipal de Salud',
+        'Gobierno Autónomo Municipal de Nor Lípez',
+        'Fundación Arte y Cultura Local',
+        'Instituto Nacional de Historia de Bolivia',
+        'Agencia Nacional de Energía Renovable',
+        'Programa Ambiental Escolar Nacional'
     ];
 
-    public function definition(): array
+
+
+
+    // Variable estática para índice secuencial
+    protected static $index = 0;
+    
+
+
+    public function definition()
     {
-        $index = $this->faker->numberBetween(0, count($this->titulos) - 1);
+        $originalPath = public_path('image/sancris/turismo/iglesia.jpg');
+
+        // Carpeta destino en public/storage/news
+        $destinationFolder = public_path('storage/news');
+
+        // Crear carpeta si no existe
+        if (!File::exists($destinationFolder)) {
+            File::makeDirectory($destinationFolder, 0755, true);
+        }
+
+        // Nombre único para la imagen
+        $fileName = 'Noticias_' . uniqid() . '.jpg';
+
+        // Copiar la imagen
+        File::copy($originalPath, $destinationFolder . '/' . $fileName);
+
+
+        $i = self::$index % count($this->titulos);
+        self::$index++;
 
         return [
-            'titulo' => $this->titulos[$index],
-            'resumen' => $this->resumenes[$index],
-            'imagen_destacada' => 'news/' . $this->faker->image('public/storage/news', 450, 350, null, false),
+            'titulo' => $this->titulos[$i],
+            'resumen' => $this->resumenes[$i],
+            'imagen_destacada' => 'news/' . $fileName, // Ruta relativa
             'user_id' => 1,
             'publicado' => $this->faker->boolean(90),
-            'autor' => $this->autores[$index],
-            'fuente' => $this->fuentes[$index],
+            'autor' => $this->autores[$i],
+            'fuente' => $this->fuentes[$i],
         ];
     }
 }
-
-

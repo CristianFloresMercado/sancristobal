@@ -11,7 +11,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Volt\Component;
 
-new #[Layout('components.layouts.auth')] class extends Component {
+new #[Layout('components.layouts.auth.split')] class extends Component {
     #[Validate('required|string|email')]
     public string $email = '';
 
@@ -20,9 +20,6 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
     public bool $remember = false;
 
-    /**
-     * Handle an incoming authentication request.
-     */
     public function login(): void
     {
         $this->validate();
@@ -43,9 +40,6 @@ new #[Layout('components.layouts.auth')] class extends Component {
         $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
     }
 
-    /**
-     * Ensure the authentication request is not rate limited.
-     */
     protected function ensureIsNotRateLimited(): void
     {
         if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
@@ -64,64 +58,34 @@ new #[Layout('components.layouts.auth')] class extends Component {
         ]);
     }
 
-    /**
-     * Get the authentication rate limiting throttle key.
-     */
     protected function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->email).'|'.request()->ip());
     }
 }; ?>
 
+<div>
+    <h2>Iniciar Sesión</h2>
+    <p class="subtitle">Ingresa tus credenciales para acceder al panel</p>
 
-
-<div class="flex flex-col gap-6">
-    <x-auth-header :title="__('Ingresa a tu cuenta')" :description="__('Ingrese tu correo electrónico y contraseña a continuación para iniciar sesión')" />
-
-    <!-- Session Status -->
     <x-auth-session-status class="text-center" :status="session('status')" />
 
-    <form wire:submit="login" class="flex flex-col gap-6">
-        <!-- Email Address -->
-        <flux:input
-            wire:model="email"
-            :label="__('Correo')"
-            type="email"
-            required
-            autofocus
-            autocomplete="email"
-            placeholder="email@example.com"
-        />
-
-        <!-- Password -->
-        <div class="relative">
-            <flux:input
-                wire:model="password"
-                :label="__('Contraseña')"
-                type="password"
-                required
-                autocomplete="current-password"
-                :placeholder="__('Ingrese su contraseña')"
-                viewable
-            />
-
-            <label for="password" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
-                <i class="la la-lock"></i>
-            </label>
+    <form wire:submit="login">
+        <div class="form-group">
+            <label for="email">Correo Electrónico</label>
+            <input wire:model="email" type="email" id="email" required autofocus autocomplete="email" placeholder="tu@correo.com">
+            @error('email') <p class="error-text">{{ $message }}</p> @enderror
         </div>
 
-        <!-- Remember Me -->
-    {{--<flux:checkbox wire:model="remember" :label="__('Recuerdame')" /> --}}
-
-        <div class="flex items-center justify-end">
-            <flux:button variant="primary" color="indigo" type="submit" class="w-full">{{ __('Ingresar') }}</flux:button>
+        <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input wire:model="password" type="password" id="password" required autocomplete="current-password" placeholder="••••••••">
+            @error('password') <p class="error-text">{{ $message }}</p> @enderror
         </div>
+
+        <button type="submit" class="btn-login" wire:loading.attr="disabled" wire:target="login">
+            <span wire:loading.remove wire:target="login">Ingresar</span>
+            <span wire:loading wire:target="login">Ingresando...</span>
+        </button>
     </form>
-
-    {{-- @if (Route::has('register'))
-        <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-600 dark:text-zinc-400">
-            <span>{{ __('Don\'t have an account?') }}</span>
-            <flux:link :href="route('register')" wire:navigate>{{ __('Sign up') }}</flux:link>
-        </div>
-    @endif --}}
 </div>

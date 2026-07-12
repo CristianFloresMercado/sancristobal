@@ -1,19 +1,23 @@
-<div class="flex items-start max-md:flex-col">
-    <div class="me-10 w-full pb-4 md:w-[220px]">
-        <flux:navlist>
-            <flux:navlist.item :href="route('settings.profile')" wire:navigate>{{ __('Profile') }}</flux:navlist.item>
-            <flux:navlist.item :href="route('settings.password')" wire:navigate>{{ __('Password') }}</flux:navlist.item>
-            <flux:navlist.item :href="route('settings.appearance')" wire:navigate>{{ __('Appearance') }}</flux:navlist.item>
-        </flux:navlist>
+<div class="row g-0">
+    <div class="col-md-3 border-end pe-4">
+        <div class="list-group list-group-flush">
+            <a href="{{ route('settings.profile') }}" wire:navigate
+                class="list-group-item list-group-item-action d-flex align-items-center gap-2 py-3 {{ request()->routeIs('settings.profile') ? 'active' : '' }}">
+                <i class="bx bx-user"></i> {{ __('Profile') }}
+            </a>
+            <a href="{{ route('settings.password') }}" wire:navigate
+                class="list-group-item list-group-item-action d-flex align-items-center gap-2 py-3 {{ request()->routeIs('settings.password') ? 'active' : '' }}">
+                <i class="bx bx-lock-alt"></i> {{ __('Password') }}
+            </a>
+            <a href="{{ route('settings.appearance') }}" wire:navigate
+                class="list-group-item list-group-item-action d-flex align-items-center gap-2 py-3 {{ request()->routeIs('settings.appearance') ? 'active' : '' }}">
+                <i class="bx bx-palette"></i> {{ __('Appearance') }}
+            </a>
+        </div>
     </div>
 
-    <flux:separator class="md:hidden" />
-
-    <div class="flex-1 self-stretch max-md:pt-6">
-        <flux:heading>{{ $heading ?? '' }}</flux:heading>
-        <flux:subheading>{{ $subheading ?? '' }}</flux:subheading>
-
-        <div class="mt-5 w-full max-w-lg">
+    <div class="col-md-9 ps-md-4">
+        <div class="py-2">
             {{ $slot }}
         </div>
     </div>

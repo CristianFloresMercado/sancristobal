@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-       @include('partials.headpublic')
+    @include('partials.headpublic')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<body style="background-color:#FDFDFC;color:#1b1b18;min-height:100vh;font-family:Inter,sans-serif;">
+    <script>!function(){document.documentElement.classList.remove('dark','dark-theme');document.documentElement.style.colorScheme='light'}();</script>
 
-<body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
-    
     <header class="header-menu-area bg-white">
         <div class="header-top pr-150px pl-150px border-bottom border-bottom-gray py-1">
             <div class="container-fluid">
@@ -15,9 +16,13 @@
                         <div class="header-widget">
                             <ul class="generic-list-item d-flex flex-wrap align-items-center fs-14">
                                 <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i
-                                        class="la la-phone mr-1"></i><a href="tel:00123456789"> (00) 74530416</a></li>
+                                        class="la la-phone mr-1"></i><a
+                                        href="https://wa.me/59174530416?text=Hola%20quiero%20más%20información"> (+591)
+                                        74530416</a></li>
                                 <li class="d-flex align-items-center"><i class="la la-envelope-o mr-1"></i><a
-                                        href="https://workspace.google.com/intl/es-419/gmail/"> contacto techservicetsu@gmail.com</a></li>
+                                        href="https://mail.google.com/mail/?view=cm&fs=1&to=techservicetsu@gmail.com&su=Consulta%20desde%20la%20web&body=Hola,%20quiero%20más%20información%20sobre%20sus%20servicios.">
+                                        contacto
+                                        techservicetsu@gmail.com</a></li>
                             </ul>
                         </div><!-- end header-widget -->
                     </div><!-- end col-lg-6 -->
@@ -59,10 +64,10 @@
                                             <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray">
                                                 <i class="la la-sign-in mr-1"></i><a href="{{ route('login') }}"> Login</a>
                                             </li>
-                                            {{--@if (Route::has('register'))
+                                            {{-- @if (Route::has('register'))
                                                 <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a
                                                         href="{{ route('register') }}"> Registrarse</a></li>
-                                            @endif--}}
+                                            @endif --}}
                                         @endauth
                                     </nav>
                                 @endif
@@ -80,17 +85,17 @@
                     <div class="row align-items-center">
                         <div class="col-lg-2">
                             <div class="logo-box">
-                                <a href="index.html" class="logo"><img
-                                        src="/Frontend/images/logomdr.png" alt="logo"></a>
+                                <a href="{{ route('home') }}" class="logo"><img src="/Frontend/images/logomdr.png"
+                                        alt="logo"></a>
                                 <div class="user-btn-action">
-                                    <div class="search-menu-toggle icon-element icon-element-sm shadow-sm mr-2"
-                                        data-toggle="tooltip" data-placement="top" title="Search">
+                                    {{-- <div class="search-menu-toggle icon-element icon-element-sm shadow-sm mr-2"
+                                        data-toggle="tooltip" data-placement="top" title="Searcdsah">
                                         <i class="la la-search"></i>
-                                    </div>
+                                    </div> --}}
 
 
                                     <div class="off-canvas-menu-toggle main-menu-toggle icon-element icon-element-sm shadow-sm"
-                                        data-toggle="tooltip" data-placement="top" title="Menu">
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="">
                                         <i class="la la-bars"></i>
                                     </div>
                                 </div>
@@ -98,24 +103,30 @@
                         </div><!-- end col-lg-2 -->
                         <div class="col-lg-10">
                             <div class="menu-wrapper">
-
-                                <form method="post">
+                                {{-- boton de busqueda --}}
+                                {{-- <form method="post">
                                     <div class="form-group mb-0">
                                         <input class="form-control form--control pl-3" type="text" name="search"
                                             placeholder="Search for anything">
                                         <span class="la la-search search-icon"></span>
                                     </div>
-                                </form>
+                                </form> --}}
                                 <nav class="main-menu">
                                     <ul>
                                         <li>
-                                            <a href="{{ route('home') }}">Principal <i class="pl-3 fs-12"></i></a>
-                                            <a href="{{ route('turismo') }}">Turismo<i class="pl-3 fs-12"></i></a>
-                                            <a href="{{ route('noticias') }}">Noticias <i class="pl-3 fs-12"></i></a>
-                                            <a href="{{ route('historia') }}">Historia <i class="pl-3 fs-12"></i></a>
+                                            <a href="{{ route('home') }}">Principal</a>
                                         </li>
-                                    </ul><!-- end ul -->
-                                </nav><!-- end main-menu -->
+                                        <li>
+                                            <a href="{{ route('turismo') }}">Turismo</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('noticias') }}">Noticias</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('negocios') }}">Negocios</a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div><!-- end menu-wrapper -->
                         </div><!-- end col-lg-10 -->
                     </div><!-- end row -->
@@ -127,42 +138,28 @@
 
         <div class="off-canvas-menu custom-scrollbar-styled main-off-canvas-menu">
             <div class="off-canvas-menu-close main-menu-close icon-element icon-element-sm shadow-sm"
-                data-toggle="tooltip" data-placement="left" title="Close menu">
+                data-bs-toggle="tooltip" data-bs-placement="left" title="">
                 <i class="la la-times"></i>
             </div><!-- end off-canvas-menu-close -->
-            <ul class="generic-list-item off-canvas-menu-list pt-90px">
-                <li>
-                    <a href="{{ route('home') }}">Principal</a>
-                    <a href="{{ route('turismo') }}">Turismo</a>
-                    <a href="{{ route('noticias') }}">Noticias</a>
-                    <a href="{{ route('historia') }}">Historia</a>
-                </li>
+            <div style="padding: 30px 20px 15px; border-bottom: 1px solid #e8e8e8;">
+                <a href="{{ route('home') }}" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+                    <img src="/image/imagenicono.png" alt="logo" style="width:44px;height:44px;border-radius:10px;object-fit:cover;background:#fff;padding:3px;box-shadow:0 2px 8px rgba(26,35,126,0.15);">
+                    <span style="font-weight:700;font-size:16px;color:#1a237e;line-height:1.2;">San Cristóbal<br><span style="font-weight:400;font-size:12px;color:#64748b;">Portal Comunitario</span></span>
+                </a>
+            </div>
+            <ul class="generic-list-item off-canvas-menu-list pt-3" style="padding: 12px 0;">
+                <li style="margin-bottom:0;"><a href="{{ route('home') }}" style="padding:14px 20px;display:flex;align-items:center;gap:12px;font-size:15px;font-weight:500;color:#1e293b;border-right:3px solid transparent;transition:all .2s;" onmouseover="this.style.color='#1a237e';this.style.borderRightColor='#1a237e';this.style.backgroundColor='rgba(26,35,126,0.04)'" onmouseout="this.style.color='#1e293b';this.style.borderRightColor='transparent';this.style.backgroundColor='transparent'"><i class="la la-home" style="font-size:20px;width:24px;text-align:center;color:#1a237e;"></i> Principal</a></li>
+                <li style="margin-bottom:0;"><a href="{{ route('turismo') }}" style="padding:14px 20px;display:flex;align-items:center;gap:12px;font-size:15px;font-weight:500;color:#1e293b;border-right:3px solid transparent;transition:all .2s;" onmouseover="this.style.color='#1a237e';this.style.borderRightColor='#1a237e';this.style.backgroundColor='rgba(26,35,126,0.04)'" onmouseout="this.style.color='#1e293b';this.style.borderRightColor='transparent';this.style.backgroundColor='transparent'"><i class="la la-map-marker" style="font-size:20px;width:24px;text-align:center;color:#1a237e;"></i> Turismo</a></li>
+                <li style="margin-bottom:0;"><a href="{{ route('noticias') }}" style="padding:14px 20px;display:flex;align-items:center;gap:12px;font-size:15px;font-weight:500;color:#1e293b;border-right:3px solid transparent;transition:all .2s;" onmouseover="this.style.color='#1a237e';this.style.borderRightColor='#1a237e';this.style.backgroundColor='rgba(26,35,126,0.04)'" onmouseout="this.style.color='#1e293b';this.style.borderRightColor='transparent';this.style.backgroundColor='transparent'"><i class="la la-newspaper-o" style="font-size:20px;width:24px;text-align:center;color:#1a237e;"></i> Noticias</a></li>
+                <li style="margin-bottom:0;"><a href="{{ route('negocios') }}" style="padding:14px 20px;display:flex;align-items:center;gap:12px;font-size:15px;font-weight:500;color:#1e293b;border-right:3px solid transparent;transition:all .2s;" onmouseover="this.style.color='#1a237e';this.style.borderRightColor='#1a237e';this.style.backgroundColor='rgba(26,35,126,0.04)'" onmouseout="this.style.color='#1e293b';this.style.borderRightColor='transparent';this.style.backgroundColor='transparent'"><i class="la la-briefcase" style="font-size:20px;width:24px;text-align:center;color:#1a237e;"></i> Negocios</a></li>
             </ul>
         </div><!-- end off-canvas-menu -->
-
-
-        <div class="mobile-search-form">
-            <div class="d-flex align-items-center">
-                <form method="post" class="flex-grow-1 mr-3">
-                    <div class="form-group mb-0">
-                        <input class="form-control form--control pl-3" type="text" name="search"
-                            placeholder="Search for anything">
-                        <span class="la la-search search-icon"></span>
-                    </div>
-                </form>
-                <div class="search-bar-close icon-element icon-element-sm shadow-sm">
-                    <i class="la la-times"></i>
-                </div><!-- end off-canvas-menu-close -->
-            </div>
-        </div><!-- end mobile-search-form -->
     </header><!-- end header-menu-area -->
 
-    
-    
+
+
 
     {{ $slot }}
-
-    @fluxScripts
 
     @if (Route::has('login'))
         <div class="h-14.5 hidden lg:block"></div>
@@ -170,86 +167,81 @@
 
 
 
-<section class="footer-area pt-100px">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 responsive-column-half">
-                <div class="footer-item">
-                    <a href="index.html">
-                        <img src="/Frontend/images/logomdr.png" alt="footer logo" class="footer__logo">
-                    </a>
-                    <ul class="generic-list-item pt-4">
-                        <li><a href="tel:+1631237884">74530416</a></li>
-                        <li><a href="mailto:support@wbsite.com">techservicetsu@gmail.com</a></li>
-                        <li>San Cristobal - Potosi - Bolivia</li>
-                    </ul>
-                    <h3 class="fs-20 font-weight-semi-bold pt-4 pb-2">Síguenos en</h3>
-                    <ul class="social-icons social-icons-styled">
-                        <li class="mr-1"><a href="#" class="facebook-bg"><i class="la la-facebook"></i></a></li>
-                        <li class="mr-1"><a href="#" class="twitter-bg"><i class="la la-twitter"></i></a></li>
-                        <li class="mr-1"><a href="#" class="instagram-bg"><i class="la la-instagram"></i></a></li>
-                        <li class="mr-1"><a href="#" class="linkedin-bg"><i class="la la-linkedin"></i></a></li>
-                    </ul>
-                </div><!-- end footer-item -->
-            </div><!-- end col-lg-3 -->
-            <div class="col-lg-3 responsive-column-half">
-                <div class="footer-item">
-                    <h3 class="fs-20 font-weight-semi-bold">Compania</h3>
-                    <span class="section-divider section--divider"></span>
-                    <ul class="generic-list-item">
-                        <li><a href="#">Sobre nosotros</a></li>
-                        <li><a href="#">Contáctanos</a></li>
-                        <li><a href="#">Conviértete en profesor</a></li>
-                        <li><a href="#">Soporte</a></li>
-                        <li><a href="#">Preguntas Frecuentes</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div><!-- end footer-item -->
-            </div><!-- end col-lg-3 -->
-            <div class="col-lg-3 responsive-column-half">
-                <div class="footer-item">
-                    <h3 class="fs-20 font-weight-semi-bold">Cursos</h3>
-                    <span class="section-divider section--divider"></span>
-                    <ul class="generic-list-item">
-                        <li><a href="#">Desarrollo Web</a></li>
-                        <li><a href="#">Hacking</a></li>
-                        <li><a href="#">Aprendizaje de PHP</a></li>
-                        <li><a href="#">Inglés Hablado</a></li>
-                        <li><a href="#">Coche Autónomo</a></li>
-                        <li><a href="#">Recolección de Basura</a></li>
-                    </ul>
-                </div><!-- end footer-item -->
-            </div><!-- end col-lg-3 -->
-            <div class="col-lg-3 responsive-column-half">
-                <div class="footer-item">
-                    <h3 class="fs-20 font-weight-semi-bold">Descargar App</h3>
-                    <span class="section-divider section--divider"></span>
-                    <div class="mobile-app">
-                        <p class="pb-3 lh-24">Descarga nuestra aplicación móvil y aprende sobre la marcha.</p>
-                    </div>
-                </div><!-- end footer-item -->
-            </div><!-- end col-lg-3 -->
-        </div><!-- end row -->
-    </div><!-- end container -->
-    <div class="section-block"></div>
-    <div class="copyright-content py-4">
+    <footer style="background:#1a237e;color:#fff;padding:40px 0 0;">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <p class="copy-desc">&copy; 2025 San Cristobal. Todos los derechos reservados. Por <a href="https://techydevs.com/">TechService</a></p>
-                </div><!-- end col-lg-6 -->
-                <div class="col-lg-6">
-                    
-                </div><!-- end col-lg-6 -->
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </div><!-- end copyright-content -->
-</section><!-- end footer-area -->
-<!-- ================================
+            <div class="row g-4">
+                <div class="col-lg-5 col-md-6">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <img src="/image/imagenicono.png" alt="logo" style="width:40px;height:40px;border-radius:8px;object-fit:cover;">
+                        <span style="font-family:Georgia,serif;font-size:1.1rem;font-weight:700;">San Cristóbal</span>
+                    </div>
+                    <p style="font-size:0.88rem;color:#cfd8dc;line-height:1.7;">Portal comunitario de información, turismo y negocios locales de San Cristóbal, Potosí - Bolivia.</p>
+                    <ul class="list-unstyled mt-3" style="font-size:0.85rem;color:#cfd8dc;">
+                        <li class="mb-2"><i class="la la-map-marker me-2" style="color:#90caf9;"></i>San Cristóbal - Potosí - Bolivia</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="fw-bold mb-3 text-white" style="font-size:0.95rem;">Navegación</h6>
+                    <ul class="list-unstyled" style="font-size:0.85rem;">
+                        <li class="mb-2"><a href="{{ route('home') }}" style="color:#e3f2fd;text-decoration:none;">Inicio</a></li>
+                        <li class="mb-2"><a href="{{ route('turismo') }}" style="color:#e3f2fd;text-decoration:none;">Turismo</a></li>
+                        <li class="mb-2"><a href="{{ route('noticias') }}" style="color:#e3f2fd;text-decoration:none;">Noticias</a></li>
+                        <li class="mb-2"><a href="{{ route('negocios') }}" style="color:#e3f2fd;text-decoration:none;">Negocios</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h6 class="fw-bold mb-3 text-white" style="font-size:0.95rem;">Contacto</h6>
+                    <ul class="list-unstyled" style="font-size:0.85rem;color:#e3f2fd;">
+                        <li class="mb-2"><i class="la la-phone me-2"></i>+591 74530416</li>
+                        <li class="mb-2"><i class="la la-envelope me-2"></i>techservicetsu@gmail.com</li>
+                        <li><i class="la la-map-marker me-2"></i>San Cristóbal - Potosí</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.15);margin-top:35px;">
+            <div class="container py-3">
+                <div class="d-flex flex-wrap justify-content-between align-items-center" style="font-size:0.8rem;color:#90caf9;">
+                    <span>&copy; {{ date('Y') }} San Cristóbal. Todos los derechos reservados.</span>
+                    <span>Por <a href="https://techserviceweb.com/" style="color:#fff;text-decoration:none;">TechService</a></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ================================
           END FOOTER AREA
 -->
+
+    <script>
+        function showMessage(curso) {
+            alert("Estamos trabajando en el curso de " + curso);
+        }
+
+        /* Public dark mode toggle */
+        document.addEventListener('DOMContentLoaded', function() {
+            var html = document.documentElement;
+            var darkBtn = document.querySelector('.dark-mode-btn');
+            var lightBtn = document.querySelector('.light-mode-btn');
+
+            if (darkBtn) {
+                darkBtn.addEventListener('click', function() {
+                    html.classList.add('dark-theme', 'dark');
+                    html.classList.remove('light-theme');
+                    localStorage.setItem('flux-theme', 'dark');
+                    localStorage.setItem('sancristobal-theme', 'dark');
+                });
+            }
+            if (lightBtn) {
+                lightBtn.addEventListener('click', function() {
+                    html.classList.remove('dark-theme', 'dark');
+                    html.classList.add('light-theme');
+                    localStorage.setItem('flux-theme', 'light');
+                    localStorage.setItem('sancristobal-theme', 'light');
+                });
+            }
+        });
+    </script>
 
 </body>
 
 </html>
-

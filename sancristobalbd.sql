@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-07-2025 a las 18:28:57
+-- Tiempo de generación: 27-07-2025 a las 20:48:07
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -145,17 +145,13 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `titulo`, `resumen`, `imagen_destacada`, `user_id`, `publicado`, `autor`, `fuente`, `created_at`, `updated_at`) VALUES
-(1, 'asdfsadfasdfasdfas', NULL, 'news/ERXiJ7l1pb4WIrZqqxKsRz08C3MW4DbchzaoCPmq.png\r\n\r\n', 1, 0, NULL, NULL, '2025-07-15 23:55:16', '2025-07-15 23:55:16'),
-(2, 'asdfsadfasdfasdfas', NULL, 'news/ERXiJ7l1pb4WIrZqqxKsRz08C3MW4DbchzaoCPmq.png\r\n', 1, 0, NULL, NULL, '2025-07-17 02:24:19', '2025-07-17 02:24:19'),
-(3, 'asdfsadfasdfasdfas', NULL, 'news/ERXiJ7l1pb4WIrZqqxKsRz08C3MW4DbchzaoCPmq.png\r\n\r\n', 1, 0, NULL, NULL, '2025-07-17 02:26:24', '2025-07-17 02:26:24'),
-(4, 'prueba aletr', NULL, 'news/ERXiJ7l1pb4WIrZqqxKsRz08C3MW4DbchzaoCPmq.png\r\n\r\n', 1, 0, NULL, NULL, '2025-07-18 00:51:38', '2025-07-18 00:51:38'),
-(5, 'fasdfsad', NULL, 'news/ERXiJ7l1pb4WIrZqqxKsRz08C3MW4DbchzaoCPmq.png\r\n\r\n', 1, 0, NULL, NULL, '2025-07-18 00:52:01', '2025-07-18 00:52:01'),
-(6, '123', '<td class=\"px-6 py-4\">\r\n                            {{$item->fuente}}\r\n                        </td><td class=\"px-6 py-4\">\r\n                            {{$item->fuente}}\r\n                        </td><td class=\"px-6 py-4\">\r\n                            {{$item->fuente}}\r\n                        </td><td class=\"px-6 py-4\">\r\n                            {{$item->fuente}}\r\n                        </td><td class=\"px-6 py-4\">\r\n                            {{$item->fuente}}\r\n                        </td>\r\nsadfsadlkflksadjf', 'news/ERXiJ7l1pb4WIrZqqxKsRz08C3MW4DbchzaoCPmq.png\r\n', 1, 1, 'asdfsad', 'asdfas', '2025-07-18 02:31:34', '2025-07-18 02:31:34'),
-(7, 'asdfsadfasdfasdfas', 'La historia de San Cristóbal se remonta a tiempos precolombinos (1584, según documentos de creación), cuando la zona estaba habitada por diferentes etnias indígenas, como los Lliphi y los Quechuas. Durante la colonización hispana, la región de los Lípez fue incorporada al Virreinato del Perú y posteriormente al Virreinato del Río de la Plata. Los colonizadores españoles establecieron una serie de asentamientos en la zona, incluyendo la actual San Cristóbal , que se convirtió en un  relevante centro administrativo.', 'news/ERXiJ7l1pb4WIrZqqxKsRz08C3MW4DbchzaoCPmq.png\r\n', 1, 1, 'qwerrew', 'qwer', '2025-07-18 02:33:58', '2025-07-18 02:33:58'),
-(8, 'sadf', 'asdfasdfsadfsadfasdfasdfsadfsadfsadfsad', 'news/ERXiJ7l1pb4WIrZqqxKsRz08C3MW4DbchzaoCPmq.png\r\n', 1, 0, 'asdf', 'asdf', '2025-07-18 02:39:37', '2025-07-18 02:39:37'),
-(9, 'afsdf', 'asdffffffffffffffffffffffffasdffffffffffffffffffffffffasdffffffffffffffffffffffffasdffffffffffffffffffffffffasdffffffffffffffffffffffffasdffffffffffffffffffffffff', 'news/ERXiJ7l1pb4WIrZqqxKsRz08C3MW4DbchzaoCPmq.png\r\n', 1, 0, 'fdsfsdf', 'fadsfsd', '2025-07-22 05:35:10', '2025-07-22 05:35:10'),
-(10, 'asdffasd', 'asdfsafsdfasdfsafasdfasdfsafsdfasdfsafasdfasdfsafsdfasdfsafasdfasdfsafsdfasdfsafasdfasdfsafsdfasdfsafasdfasdfsafsdfasdfsafasdfasdfsafsdfasdfsafasdfasdfsafsdfasdfsafasdf', 'news/ERXiJ7l1pb4WIrZqqxKsRz08C3MW4DbchzaoCPmq.png\r\n', 1, 0, 'asdfsad', 'asdfsadf', '2025-07-24 03:23:02', '2025-07-24 03:23:02'),
-(11, 'fasd', 'asdfasdfsadsda fa sdfasd fasdf asda sdf asdfasdf asdf asdf asdf asd fasdf sadf saf a', 'news/ERXiJ7l1pb4WIrZqqxKsRz08C3MW4DbchzaoCPmq.png', 1, 1, 'afsdf', 'dfasdf', '2025-07-24 03:26:58', '2025-07-24 03:26:58');
+(1, 'Desarrollo social fortalece a familias vulnerables', 'Organizaciones sociales trabajan para mejorar las condiciones de vida de las familias más necesitadas.', 'news/BPn1EINS6NFHZ95zSoI7jOSc7P59fvn7CDxLU70b.jpg', 1, 1, 'Desarrollo Social', 'Fundación Social', '2025-07-25 18:35:05', '2025-07-25 18:39:52'),
+(2, 'Nuevas inversiones impulsan la minería local', 'Importantes empresas han decidido invertir en la minería, generando nuevas oportunidades para la población.', 'news/', 1, 0, 'Equipo Minero Local', 'Agencia Minera', '2025-07-25 18:35:05', '2025-07-25 18:39:47'),
+(3, 'Nuevas inversiones impulsan la minería local', 'Importantes empresas han decidido invertir en la minería, generando nuevas oportunidades para la población.', 'news/', 1, 0, 'Equipo Minero Local', 'Agencia Minera', '2025-07-25 18:35:05', '2025-07-25 18:39:42'),
+(4, 'Avances tecnológicos llegan a la comunidad', 'La llegada de tecnología de punta promete modernizar distintos sectores productivos y educativos.', 'news/', 1, 0, 'Tecnología Hoy', 'Noticias Tecnológicas', '2025-07-25 18:35:05', '2025-07-25 18:35:05'),
+(5, 'Desarrollo social fortalece a familias vulnerables', 'Organizaciones sociales trabajan para mejorar las condiciones de vida de las familias más necesitadas.', 'news/VaB1v447oTgSDaRroty5UQ31AePrZeTsFLc6cQ0y.jpg', 1, 1, 'Desarrollo Social', 'Fundación Social', '2025-07-25 18:35:05', '2025-07-25 18:39:36'),
+(6, 'Desarrollo social fortalece a familias vulnerables', 'Organizaciones sociales trabajan para mejorar las condiciones de vida de las familias más necesitadas.', 'news/VcG1tu5BmWx7Cz7S9rkMzOzJ3ADcjj6i9bjC182J.jpg', 1, 1, 'Desarrollo Social', 'Fundación Social', '2025-07-25 18:35:05', '2025-07-25 18:39:29'),
+(7, 'Nuevas inversiones impulsan la minería local', 'Importantes empresas han decidido invertir en la minería, generando nuevas oportunidades para la población.', 'news/SXIhOJoMFmJP7lvrNu8qnLyVUPxF9XWzYCOL6ZJE.jpg', 1, 1, 'Equipo Minero Local', 'Agencia Minera', '2025-07-25 18:35:05', '2025-07-25 21:57:08');
 
 -- --------------------------------------------------------
 
@@ -189,11 +185,18 @@ CREATE TABLE `profiles` (
   `telefono_policia` varchar(255) DEFAULT NULL,
   `telefono_emergencia` varchar(255) DEFAULT NULL,
   `horarios_atencion` text DEFAULT NULL,
-  `enlaces_utiles` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`enlaces_utiles`)),
+  `enlaces_utiles` varchar(255) DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `profiles`
+--
+
+INSERT INTO `profiles` (`id`, `nombre_comunidad`, `descripcion`, `alcalde`, `telefono_municipal`, `direccion_municipal`, `hospital_principal`, `direccion_hospital`, `telefono_hospital`, `telefono_bomberos`, `telefono_policia`, `telefono_emergencia`, `horarios_atencion`, `enlaces_utiles`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'San Cristóbal c', 'Comunidad minera con gran riqueza cultural.', 'Juan Pérez', '591-2620000', 'Av. Principal N° 123', 'Hospital San Cristóbal', 'Calle Salud N° 456', '591-2620011', '591-2620022', '591-2620033', '911', 'Lunes a Viernes de 08:00 a 16:00', 'https://sancristobal.bo', 1, '2025-07-25 18:35:05', '2025-07-25 20:09:05');
 
 -- --------------------------------------------------------
 
@@ -215,7 +218,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('jbFQBXUlNddTXw2UdzJLJFNNNB6nEgaR1KZepsGR', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiMzZJT1dMN1VabXJ4Z0t4SzdJQ2E4Y3dwNzVPOW82SlY4QVJlMmxkaCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9uZXdzLzEvZWRpdCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1753315639);
+('gyPvLBUFx6FvHWqjFmHWYYsaif24jCjRqhiSTdWi', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiYk8xTXRLeE9RZVRLVGVHYmp6Nk0zcXBERExRUktucG80Z2cwbGIwUCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9zdG9yaWVzIjt9czozOiJ1cmwiO2E6MDp7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1753468842);
 
 -- --------------------------------------------------------
 
@@ -236,6 +239,19 @@ CREATE TABLE `stories` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `stories`
+--
+
+INSERT INTO `stories` (`id`, `titulo`, `resumen`, `imagen_destacada`, `user_id`, `publicado`, `año_ocurrido`, `personajes`, `created_at`, `updated_at`) VALUES
+(1, 'La Evolución de la Cultura Regional', 'Se exploran las raíces culturales y la evolución de las tradiciones que hacen única a San Cristóbal.', 'historias/TZfpuKl3v247QJwMZQfkCDMPwXcg9Pt8kAEKOO5x.jpg', 1, 0, 1970, 'Miguel Torres, Rosa Jiménez', '2025-07-25 18:35:05', '2025-07-25 22:40:42'),
+(2, 'Anécdotas de la Época Colonial', 'Anécdotas y testimonios que reflejan la vida cotidiana durante la época colonial en San Cristóbal.', 'historias/P33h8gFdKg40uFx6wlfgGoBLPVOoML4plHpPGzQQ.jpg', 1, 0, 1970, 'Alberto Navarro, Sofía Flores', '2025-07-25 18:35:05', '2025-07-25 22:40:33'),
+(3, 'El Descubrimiento de San Cristóbal', 'En este relato detallamos el descubrimiento de San Cristóbal y cómo influyó en la historia local y regional.', 'historias/IfffKJbwN32cRDKDQjCyvoC4LflUYynipafZoOxY.jpg', 1, 0, 1970, 'Don José Martínez, María López', '2025-07-25 18:35:05', '2025-07-25 22:40:24'),
+(4, 'Un Viaje al Pasado Minero', 'Un recorrido por los eventos más importantes que definieron la minería en la región.', 'historias/sOueuiMAq2WgA3DU3VOchEIohKqYGc869zxI8xsM.jpg', 1, 1, 1970, 'Jorge Ramírez, Elena Castro', '2025-07-25 18:35:05', '2025-07-25 18:39:01'),
+(5, 'La Evolución de la Cultura Regional', 'Se exploran las raíces culturales y la evolución de las tradiciones que hacen única a San Cristóbal.', 'historias/H6V2OSJt4vGdY3mZ8OrzNgUX0Vp4KfeKKtsq0GD4.jpg', 1, 1, 1970, 'Miguel Torres, Rosa Jiménez', '2025-07-25 18:35:05', '2025-07-25 18:38:55'),
+(6, 'La Fundación de Nuestra Comunidad', 'Una historia sobre los primeros habitantes y la fundación oficial de la comunidad con datos históricos relevantes.', 'historias/l5NKPMdf6IWsA1SGa9MtPEJ4aaUyLhYSeAaDHpsD.jpg', 1, 1, 1970, 'Juan Pérez, Ana Gómez', '2025-07-25 18:35:05', '2025-07-25 18:38:48'),
+(7, 'El Rol de los Personajes Legendarios', 'Personajes que marcaron la historia local con su liderazgo, valentía y compromiso con el pueblo.', 'historias/dOMU53xC6T721jNBe1c8FMWyRR8Ufn2SMIcxpy53.jpg', 1, 1, 1970, 'Luis Herrera, Paula Mendoza', '2025-07-25 18:35:05', '2025-07-25 18:38:39');
+
 -- --------------------------------------------------------
 
 --
@@ -252,10 +268,17 @@ CREATE TABLE `touristsites` (
   `ubicacion` varchar(255) NOT NULL,
   `coordenadas` varchar(255) DEFAULT NULL,
   `horario` text DEFAULT NULL,
-  `galeria_imagenes` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`galeria_imagenes`)),
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `touristsites`
+--
+
+INSERT INTO `touristsites` (`id`, `titulo`, `resumen`, `imagen_destacada`, `user_id`, `publicado`, `ubicacion`, `coordenadas`, `horario`, `created_at`, `updated_at`) VALUES
+(1, 'afsdfasdf', 'sdfasdfasdfsadfsañdlkfaslkñdfljkas', 'sitios/ndrzGyWgy0JOmVFVhpBIABa32USx3rWXCDmFiRxF.jpg', 1, 1, 'asdfasdfasdf', 'afsdfasdfasdfasdfasd', 'asdfasdfasda', '2025-07-25 18:37:35', '2025-07-25 18:37:35'),
+(2, 'ejmeposodfa', 'asdfasdfasdfasdafgafdlkñsjaflsjdlfkasldkfjlaksdjfñlkasd', 'sitios/rtAxiZSbrIcrmsC38NBgjKbabmbWYHUxCa4Kh97S.jpg', 1, 1, 'fasdfasdf', 'asdfasdf', 'fasdfasdfasdfa', '2025-07-25 18:38:29', '2025-07-25 18:38:29');
 
 -- --------------------------------------------------------
 
@@ -279,7 +302,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'cristian', 'cristianfloresmer@gmail.com', NULL, '$2y$12$M6uoCLPhdou.urm1XRjAue9tqV697nBtm.WPWqpJYrkHjqvsvBj9u', NULL, '2025-07-15 23:54:45', '2025-07-15 23:54:45');
+(1, 'Cristian', 'Cristianfloresmer@gmail.com', '2025-07-25 18:35:05', '$2y$12$lhAqpsRiPmv2flQHmC2Cx.DiU6zf18SqhT15RosiibmlYxhGSZ9Yi', 'rCbZQjdqFVSpRU4WjMcUvDbxps4gpqWtFzpmM0lXwBAnPUXtlrkcdvNpumVs', '2025-07-25 18:35:05', '2025-07-25 18:35:05');
 
 --
 -- Índices para tablas volcadas
@@ -398,25 +421,25 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `profiles`
 --
 ALTER TABLE `profiles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `stories`
 --
 ALTER TABLE `stories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `touristsites`
 --
 ALTER TABLE `touristsites`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

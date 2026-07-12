@@ -10,25 +10,18 @@ new class extends Component {
     public string $name = '';
     public string $email = '';
 
-    /**
-     * Mount the component.
-     */
     public function mount(): void
     {
         $this->name = Auth::user()->name;
         $this->email = Auth::user()->email;
     }
 
-    /**
-     * Update the profile information for the currently authenticated user.
-     */
     public function updateProfileInformation(): void
     {
         $user = Auth::user();
 
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
-
             'email' => [
                 'required',
                 'string',
@@ -50,21 +43,16 @@ new class extends Component {
         $this->dispatch('profile-updated', name: $user->name);
     }
 
-    /**
-     * Send an email verification notification to the current user.
-     */
     public function resendVerificationNotification(): void
     {
         $user = Auth::user();
 
         if ($user->hasVerifiedEmail()) {
             $this->redirectIntended(default: route('dashboard', absolute: false));
-
             return;
         }
 
         $user->sendEmailVerificationNotification();
-
         Session::flash('status', 'verification-link-sent');
     }
 }; ?>
@@ -73,41 +61,43 @@ new class extends Component {
     @include('partials.settings-heading')
 
     <x-settings.layout :heading="__('Profile')" :subheading="__('Update your name and email address')">
-        <form wire:submit="updateProfileInformation" class="my-6 w-full space-y-6">
-            <flux:input wire:model="name" :label="__('Name')" type="text" required autofocus autocomplete="name" />
+        <form wire:submit="updateProfileInformation" class="my-4">
+            <div class="mb-3">
+                <label for="name" class="form-label fw-semibold">{{ __('Name') }}</label>
+                <input type="text" wire:model="name" id="name" class="form-control form-control-lg" required autofocus autocomplete="name" />
+            </div>
 
-            <div>
-                <flux:input wire:model="email" :label="__('Email')" type="email" required autocomplete="email" />
+            <div class="mb-4">
+                <label for="email" class="form-label fw-semibold">{{ __('Email') }}</label>
+                <input type="email" wire:model="email" id="email" class="form-control form-control-lg" required autocomplete="email" />
 
-                @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail &&! auth()->user()->hasVerifiedEmail())
-                    <div>
-                        <flux:text class="mt-4">
-                            {{ __('Your email address is unverified.') }}
-
-                            <flux:link class="text-sm cursor-pointer" wire:click.prevent="resendVerificationNotification">
-                                {{ __('Click here to re-send the verification email.') }}
-                            </flux:link>
-                        </flux:text>
-
+                @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !auth()->user()->hasVerifiedEmail())
+                    <div class="alert alert-warning mt-3">
+                        {{ __('Your email address is unverified.') }}
+                        <a href="#" wire:click.prevent="resendVerificationNotification" class="alert-link fw-semibold">
+                            {{ __('Click here to re-send the verification email.') }}
+                        </a>
                         @if (session('status') === 'verification-link-sent')
-                            <flux:text class="mt-2 font-medium !dark:text-green-400 !text-green-600">
+                            <div class="text-success mt-2 fw-semibold">
                                 {{ __('A new verification link has been sent to your email address.') }}
-                            </flux:text>
+                            </div>
                         @endif
                     </div>
                 @endif
             </div>
 
-            <div class="flex items-center gap-4">
-                <div class="flex items-center justify-end">
-                    <flux:button variant="primary" type="submit" class="w-full">{{ __('Save') }}</flux:button>
-                </div>
+            <div class="d-flex align-items-center gap-3">
+                <button type="submit" class="btn rounded-pill fw-semibold px-4" style="background:#1a237e;color:#fff;">
+                    <i class="bx bx-save me-1"></i> {{ __('Save') }}
+                </button>
 
-                <x-action-message class="me-3" on="profile-updated">
+                <x-action-message class="text-success" on="profile-updated">
                     {{ __('Saved.') }}
                 </x-action-message>
             </div>
         </form>
+
+        <hr class="my-4">
 
         <livewire:settings.delete-user-form />
     </x-settings.layout>

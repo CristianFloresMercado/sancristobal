@@ -3,9 +3,7 @@
 
 <title>{{ $title ?? config('app.name') }}</title>
 
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="{{ asset('image/imagenicono.png') }}">
 
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
@@ -37,7 +35,7 @@
 <link rel="stylesheet" href="{{ asset('Backend/assets/css/semi-dark.css') }}" />
 <link rel="stylesheet" href="{{ asset('Backend/assets/css/header-colors.css') }}" />
 
-<script src="{{ asset('Backend/assets/js/bootstrap.bundle.min.js') }}  "></script>
+<script src="{{ asset('Backend/assets/js/bootstrap.bundle.min.js') }}"></script>
 <!-- Plugins -->
 <script src="{{ asset('Backend/assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('Backend/assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
@@ -60,12 +58,6 @@
 <!-- App JS -->
 <script src="{{ asset('Backend/assets/js/app.js') }}"></script>
 
-<script>
-    new PerfectScrollbar(".app-container");
-</script>
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@vite(['resources/css/app.css', 'resources/js/app.js'])
 
-
-@fluxAppearance
+@livewireStyles

@@ -15,11 +15,13 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->prefix('admin')
                 ->name('admin.')
                 ->group(base_path('routes/admin.php'));
-            
+
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'role' => \App\Http\Middleware\CheckRole::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
