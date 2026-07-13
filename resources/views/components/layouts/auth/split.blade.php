@@ -8,8 +8,7 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @fluxAppearance
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <style>
             * { font-family: 'Inter', sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
             body { min-height: 100vh; background: #f1f5f9; }
@@ -149,6 +148,5 @@
                 </a>
             </div>
         </div>
-        @fluxScripts
     </body>
 </html>
