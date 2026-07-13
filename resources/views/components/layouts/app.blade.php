@@ -1,6 +1,7 @@
 @php
     $isAdmin = auth()->user()->isAdmin();
     $isPeriodista = auth()->user()->isPeriodista();
+    $isRrhh = auth()->user()->isRrhh();
     $groups = [];
 
     if ($isAdmin) {
@@ -27,6 +28,13 @@
         $groups['Plataforma'] = [
             ['name' => 'Dashboard', 'icon' => 'home', 'url' => route('admin.periodista.dashboard'), 'current' => request()->routeIs('admin.periodista.dashboard')],
             ['name' => 'Mis Noticias', 'icon' => 'news', 'url' => route('admin.mynews.index'), 'current' => request()->routeIs('admin.mynews.*')],
+        ];
+    }
+
+    if ($isRrhh) {
+        $groups['Plataforma'] = [
+            ['name' => 'Dashboard', 'icon' => 'home', 'url' => route('admin.rrhh.dashboard'), 'current' => request()->routeIs('admin.rrhh.dashboard')],
+            ['name' => 'Profesionales', 'icon' => 'briefcase', 'url' => route('admin.profesionales.index'), 'current' => request()->routeIs('admin.profesionales.*')],
         ];
     }
 @endphp

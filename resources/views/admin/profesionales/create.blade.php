@@ -46,6 +46,17 @@
                             <input type="number" class="form-control @error('experiencia_anios') is-invalid @enderror" name="experiencia_anios" value="{{ old('experiencia_anios') }}" min="0">
                             @error('experiencia_anios') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
+
+                        <div class="col-12"><h6 class="text-muted border-bottom pb-2 mt-2"><i class="bx bx-map me-1"></i>Ubicación</h6></div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Localidad de nacimiento</label>
+                            <input type="text" class="form-control" name="localidad_nacimiento" value="{{ old('localidad_nacimiento') }}" placeholder="Ej: San Cristóbal, Potosí...">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Residencia actual</label>
+                            <input type="text" class="form-control" name="residencia_actual" value="{{ old('residencia_actual') }}" placeholder="Ej: San Cristóbal, Uyuni...">
+                        </div>
                         <div class="col-md-4">
                             <label class="form-label fw-semibold">Disponibilidad *</label>
                             <select class="form-select @error('disponibilidad') is-invalid @enderror" name="disponibilidad" required>

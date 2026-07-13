@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActivityLog;
 use App\Models\Profesional;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ProfesionalController extends Controller
@@ -18,7 +20,9 @@ class ProfesionalController extends Controller
             $query->where(function ($q) use ($buscar) {
                 $q->where('nombre', 'like', "%{$buscar}%")
                   ->orWhere('especialidad', 'like', "%{$buscar}%")
-                  ->orWhere('sub_especialidad', 'like', "%{$buscar}%");
+                  ->orWhere('sub_especialidad', 'like', "%{$buscar}%")
+                  ->orWhere('localidad_nacimiento', 'like', "%{$buscar}%")
+                  ->orWhere('residencia_actual', 'like', "%{$buscar}%");
             });
         }
 
@@ -33,15 +37,20 @@ class ProfesionalController extends Controller
 
     public function create()
     {
+        $this->authorizeAdmin();
         return view('admin.profesionales.create');
     }
 
     public function store(Request $request)
     {
+        $this->authorizeAdmin();
+
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
             'especialidad' => 'required|string|max:255',
             'sub_especialidad' => 'nullable|string|max:255',
+            'localidad_nacimiento' => 'nullable|string|max:255',
+            'residencia_actual' => 'nullable|string|max:255',
             'telefono' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:255',
             'direccion' => 'nullable|string|max:255',
@@ -68,7 +77,15 @@ class ProfesionalController extends Controller
 
         $validated['publicado'] = $request->boolean('publicado');
 
-        Profesional::create($validated);
+        $profesional = Profesional::create($validated);
+
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'accion' => 'crear',
+            'modelo' => 'Profesional',
+            'modelo_id' => $profesional->id,
+            'detalle' => 'Registró al profesional: ' . $profesional->nombre,
+        ]);
 
         session()->flash('swal', [
             'icon' => 'success',
@@ -86,15 +103,20 @@ class ProfesionalController extends Controller
 
     public function edit(Profesional $profesional)
     {
+        $this->authorizeAdmin();
         return view('admin.profesionales.edit', compact('profesional'));
     }
 
     public function update(Request $request, Profesional $profesional)
     {
+        $this->authorizeAdmin();
+
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
             'especialidad' => 'required|string|max:255',
             'sub_especialidad' => 'nullable|string|max:255',
+            'localidad_nacimiento' => 'nullable|string|max:255',
+            'residencia_actual' => 'nullable|string|max:255',
             'telefono' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:255',
             'direccion' => 'nullable|string|max:255',
@@ -127,6 +149,14 @@ class ProfesionalController extends Controller
 
         $profesional->update($validated);
 
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'accion' => 'editar',
+            'modelo' => 'Profesional',
+            'modelo_id' => $profesional->id,
+            'detalle' => 'Editó al profesional: ' . $profesional->nombre,
+        ]);
+
         session()->flash('swal', [
             'icon' => 'success',
             'title' => '¡Actualizado!',
@@ -138,6 +168,8 @@ class ProfesionalController extends Controller
 
     public function destroy(Profesional $profesional)
     {
+        $this->authorizeAdmin();
+
         if ($profesional->foto && \Storage::disk('public')->exists($profesional->foto)) {
             \Storage::disk('public')->delete($profesional->foto);
         }
@@ -145,7 +177,17 @@ class ProfesionalController extends Controller
             \Storage::disk('public')->delete($profesional->curriculum);
         }
 
+        $nombre = $profesional->nombre;
+
         $profesional->delete();
+
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'accion' => 'eliminar',
+            'modelo' => 'Profesional',
+            'modelo_id' => null,
+            'detalle' => 'Eliminó al profesional: ' . $nombre,
+        ]);
 
         session()->flash('swal', [
             'icon' => 'success',
@@ -154,5 +196,12 @@ class ProfesionalController extends Controller
         ]);
 
         return redirect()->route('admin.profesionales.index');
+    }
+
+    private function authorizeAdmin()
+    {
+        if (auth()->user()->isRrhh()) {
+            abort(403, 'No tienes permiso para realizar esta acción.');
+        }
     }
 }

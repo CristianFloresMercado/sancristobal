@@ -50,14 +50,14 @@ class User extends Authenticatable
         return $this->role === 'periodista';
     }
 
+    public function isRrhh(): bool
+    {
+        return $this->role === 'rrhh';
+    }
+
     public function news()
     {
         return $this->hasMany(News::class);
-    }
-
-    public function stories()
-    {
-        return $this->hasMany(Stories::class);
     }
 
     public function tourists()

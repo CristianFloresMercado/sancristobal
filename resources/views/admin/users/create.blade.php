@@ -31,6 +31,7 @@
                             <label class="form-label fw-semibold">Rol *</label>
                             <select class="form-select @error('role') is-invalid @enderror" name="role" required>
                                 <option value="periodista" {{ old('role') === 'periodista' ? 'selected' : '' }}>Periodista</option>
+                                <option value="rrhh" {{ old('role') === 'rrhh' ? 'selected' : '' }}>RRHH</option>
                                 <option value="admin" {{ old('role') === 'admin' ? 'selected' : '' }}>Administrador</option>
                             </select>
                             @error('role') <div class="invalid-feedback">{{ $message }}</div> @enderror

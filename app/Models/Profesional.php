@@ -15,6 +15,8 @@ class Profesional extends Model
         'nombre',
         'especialidad',
         'sub_especialidad',
+        'localidad_nacimiento',
+        'residencia_actual',
         'telefono',
         'email',
         'direccion',

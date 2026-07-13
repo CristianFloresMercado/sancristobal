@@ -17,7 +17,6 @@
 
 <!-- Dexon Theme CSS -->
 <link href="{{ asset('Backend/assets/css/app.css') }}" rel="stylesheet">
-<link href="{{ asset('Backend/assets/css/icons.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('Backend/assets/css/dark-theme.css') }}" />
 <link rel="stylesheet" href="{{ asset('Backend/assets/css/semi-dark.css') }}" />
 <link rel="stylesheet" href="{{ asset('Backend/assets/css/header-colors.css') }}" />

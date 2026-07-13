@@ -85,7 +85,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-2">
                             <div class="logo-box">
-                                <a href="{{ route('home') }}" class="logo"><img src="/Frontend/images/logomdr.png"
+                                <a href="{{ route('home') }}" class="logo"><img src="/images/logomdr.png"
                                         alt="logo"></a>
                                 <div class="user-btn-action">
                                     {{-- <div class="search-menu-toggle icon-element icon-element-sm shadow-sm mr-2"
@@ -166,6 +166,13 @@
     @endif
 
 
+
+    <div style="background:#0d47a1;color:#fff;padding:12px 0;text-align:center;font-size:0.85rem;">
+        <div class="container d-flex flex-wrap justify-content-center align-items-center gap-2">
+            <span>💰 <strong>Paga y cobra en todo el mundo con Takenos</strong> — ¿Necesitas dólares? Convierte BS a $ fácil y rápido.</span>
+            <a href="https://takenos.go.link/?adj_t=1ptq1hru&adj_label=cristianfloresmer" target="_blank" class="btn btn-sm btn-light fw-bold" style="color:#0d47a1;padding:4px 14px;font-size:0.8rem;">Unirme</a>
+        </div>
+    </div>
 
     <footer style="background:#1a237e;color:#fff;padding:40px 0 0;">
         <div class="container">

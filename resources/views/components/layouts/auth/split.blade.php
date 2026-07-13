@@ -132,7 +132,7 @@
     <body>
         <div class="login-split">
             <div class="login-left">
-                <img src="{{ asset('Frontend/images/slider-img1.jpg') }}" alt="San Cristobal" class="bg-img" height="100%" width="100%">
+                <img src="{{ asset('images/slider-img1.jpg') }}" alt="San Cristobal" class="bg-img" height="100%" width="100%">
                 <div class="bg-overlay"></div>
                 <div class="login-left-content">
                     <img src="/image/imagenicono.png" alt="San Cristobal" class="logo">

@@ -53,6 +53,17 @@
                             <label class="form-label fw-semibold">Experiencia (años)</label>
                             <input type="number" class="form-control" name="experiencia_anios" value="{{ old('experiencia_anios', $profesional->experiencia_anios) }}" min="0">
                         </div>
+
+                        <div class="col-12"><h6 class="text-muted border-bottom pb-2 mt-2"><i class="bx bx-map me-1"></i>Ubicación</h6></div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Localidad de nacimiento</label>
+                            <input type="text" class="form-control" name="localidad_nacimiento" value="{{ old('localidad_nacimiento', $profesional->localidad_nacimiento) }}" placeholder="Ej: San Cristóbal, Potosí...">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Residencia actual</label>
+                            <input type="text" class="form-control" name="residencia_actual" value="{{ old('residencia_actual', $profesional->residencia_actual) }}" placeholder="Ej: San Cristóbal, Uyuni...">
+                        </div>
                         <div class="col-md-4">
                             <label class="form-label fw-semibold">Disponibilidad *</label>
                             <select class="form-select" name="disponibilidad" required>

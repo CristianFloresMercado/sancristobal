@@ -4,11 +4,13 @@
             <div class="page-title d-flex align-items-center justify-content-between flex-wrap gap-2">
                 <div>
                     <h4>Banco de Profesionales</h4>
-                    <p class="text-muted mb-0">Gestiona los profesionales de la localidad</p>
+                    <p class="text-muted mb-0">{{ auth()->user()->isRrhh() ? 'Consulta de profesionales' : 'Gestiona los profesionales de la localidad' }}</p>
                 </div>
+                @if(!auth()->user()->isRrhh())
                 <a href="{{ route('admin.profesionales.create') }}" class="btn btn-primary" wire:navigate>
                     <i class="bx bx-plus me-1"></i>Nuevo Profesional
                 </a>
+                @endif
             </div>
         </div>
 
@@ -47,6 +49,9 @@
                             @if($profesional->sub_especialidad)
                                 <p class="text-muted mb-2 small"><em>{{ $profesional->sub_especialidad }}</em></p>
                             @endif
+                            @if($profesional->residencia_actual)
+                                <p class="small mb-1"><i class="bx bx-map me-1"></i>{{ $profesional->residencia_actual }}</p>
+                            @endif
                             <span class="badge {{ $profesional->disponibilidad === 'disponible' ? 'bg-success' : 'bg-warning text-dark' }} mb-2">
                                 {{ ucfirst($profesional->disponibilidad) }}
                             </span>
@@ -58,14 +63,17 @@
                             @endif
                         </div>
                         <div class="card-footer bg-transparent border-0 d-flex gap-1 justify-content-center pb-3">
+                            @if(!auth()->user()->isRrhh())
                             <a href="{{ route('admin.profesionales.edit', $profesional) }}" class="btn btn-sm btn-outline-primary" wire:navigate title="Editar">
                                 <i class="bx bx-edit"></i>
                             </a>
+                            @endif
                             @if($profesional->curriculum)
                                 <a href="{{ asset('storage/' . $profesional->curriculum) }}" target="_blank" class="btn btn-sm btn-outline-info" title="Ver CV">
                                     <i class="bx bx-file"></i>
                                 </a>
                             @endif
+                            @if(!auth()->user()->isRrhh())
                             <form action="{{ route('admin.profesionales.destroy', $profesional->id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Eliminar este profesional?')">
                                 @csrf
                                 @method('DELETE')
@@ -73,6 +81,7 @@
                                     <i class="bx bx-trash"></i>
                                 </button>
                             </form>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -81,7 +90,9 @@
                     <div class="text-center text-muted py-5">
                         <i class="bx bx-user fs-1 d-block mb-2"></i>
                         <p>No se encontraron profesionales</p>
+                        @if(!auth()->user()->isRrhh())
                         <a href="{{ route('admin.profesionales.create') }}" class="btn btn-primary btn-sm" wire:navigate>Registrar el primero</a>
+                        @endif
                     </div>
                 </div>
             @endforelse

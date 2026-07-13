@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Frontend\NegocioController;
 use App\Models\News;
 use App\Models\Negocio;
 use App\Models\Profesional;
@@ -56,6 +55,9 @@ Route::get('/negocios', function () {
 Route::get('/dashboard', function () {
     if (auth()->user()->isPeriodista()) {
         return redirect()->route('admin.periodista.dashboard');
+    }
+    if (auth()->user()->isRrhh()) {
+        return redirect()->route('admin.rrhh.dashboard');
     }
 
     $totalNews = News::count();

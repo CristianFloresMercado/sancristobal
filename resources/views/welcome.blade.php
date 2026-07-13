@@ -115,8 +115,8 @@
                     <div class="row g-3">
                         <div class="col-6"><img class="culture-img" src="https://www.minerasancristobal.com/v3/es/wp-content/uploads/2020/03/04-Las-6-claves-que-hacen-de-Minera-San-Crist%C3%B3bal-una-empresa-boliviana-....jpg" alt="Cultura" style="width:100%;height:180px;object-fit:cover;border-radius:12px;"></div>
                         <div class="col-6"><img class="culture-img" src="https://boliviatravelsite.com/Images/Attractionphotos/san-cristobal-01.jpg" alt="Danza" style="width:100%;height:180px;object-fit:cover;border-radius:12px;"></div>
-                        <div class="col-6"><img class="culture-img" src="https://boliviatravelsite.com/Images/Attractionphotos/san-cristobal-01.jpg" alt="Carnaval" style="width:100%;height:180px;object-fit:cover;border-radius:12px;"></div>
-                        <div class="col-6"><img class="culture-img" src="https://www.minerasancristobal.com/v3/es/wp-content/uploads/2020/03/04-Las-6-claves-que-hacen-de-Minera-San-Crist%C3%B3bal-una-empresa-boliviana-....jpg" alt="Tradiciones" style="width:100%;height:180px;object-fit:cover;border-radius:12px;"></div>
+                        <div class="col-6"><img class="culture-img" src="./image/img3.png" alt="Carnaval" style="width:100%;height:180px;object-fit:cover;border-radius:12px;"></div>
+                        <div class="col-6"><img class="culture-img" src="./image/img4.jpg" alt="Tradiciones" style="width:100%;height:180px;object-fit:cover;border-radius:12px;"></div>
                     </div>
                 </div>
             </div>

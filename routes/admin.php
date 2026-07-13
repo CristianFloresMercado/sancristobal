@@ -17,9 +17,7 @@ Route::middleware(['role:admin'])->group(function () {
     Route::resource('categorias', CategoriaController::class);
     Route::resource('subcategorias', SubcategoriaController::class);
     Route::resource('negocios', NegocioController::class);
-    Route::resource('profesionales', ProfesionalController::class)->parameters(['profesionales' => 'profesional']);
     Route::resource('tourists', TouristController::class);
-    Route::resource('profile', ProfileController::class);
     Route::resource('instituciones', InstitucionController::class)->except(['show']);
     Route::get('activity-logs', [\App\Http\Controllers\Admin\ActivityLogController::class, 'index'])->name('activity-logs.index');
     Route::get('backups', [\App\Http\Controllers\Admin\BackupController::class, 'index'])->name('backups.index');
@@ -38,10 +36,21 @@ Route::middleware(['role:admin'])->group(function () {
     Route::post('pagos/{pago}/aprobar', [PagoController::class, 'aprobar'])->name('pagos.aprobar');
     Route::post('pagos/{pago}/rechazar', [PagoController::class, 'rechazar'])->name('pagos.rechazar');
     Route::delete('pagos/{pago}', [PagoController::class, 'destroy'])->name('pagos.destroy');
+    Route::put('profile/{profile}', [ProfileController::class, 'update'])->name('profile.update');
+});
+
+Route::middleware(['role:admin,rrhh'])->group(function () {
+    Route::resource('profesionales', ProfesionalController::class)->parameters(['profesionales' => 'profesional']);
+});
+
+Route::middleware(['role:rrhh'])->group(function () {
+    Route::get('panel-rrhh', function () {
+        return view('admin.rrhh.dashboard');
+    })->name('rrhh.dashboard');
 });
 
 Route::middleware(['role:periodista'])->group(function () {
-    Route::get('dashboard', function () {
+    Route::get('panel-periodista', function () {
         return view('periodista.dashboard');
     })->name('periodista.dashboard');
     Route::get('mis-noticias', [NewController::class, 'index'])->name('mynews.index');

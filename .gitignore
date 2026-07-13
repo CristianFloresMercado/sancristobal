@@ -21,4 +21,5 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
-*.zip
+/*.zip
+/storage/app/backups/
