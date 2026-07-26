@@ -79,7 +79,7 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
     <script>
-        const sanCristobal = [-21.154317257395107, -67.16457366943361];
+        const sanCristobal = [-21.153729, -67.165680];
 
         const mapa = L.map('mapa', { maxZoom: 17, minZoom: 14 }).setView(sanCristobal, 16);
 
@@ -87,6 +87,25 @@
             attribution: '',
             maxZoom: 17
         }).addTo(mapa);
+
+        L.circle(sanCristobal, {
+            radius: 2000,
+            color: '#1a237e',
+            fillColor: '#1a237e',
+            fillOpacity: 0.05,
+            weight: 2,
+            dashArray: '8,8'
+        }).addTo(mapa);
+
+        function haversine(lat1, lon1, lat2, lon2) {
+            var R = 6371;
+            var dLat = (lat2 - lat1) * Math.PI / 180;
+            var dLon = (lon2 - lon1) * Math.PI / 180;
+            var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                    Math.sin(dLon/2) * Math.sin(dLon/2);
+            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        }
 
         const negocios = [
             @foreach ($negocios as $n)
@@ -112,11 +131,12 @@
                         fotoPrincipal: @json($n->foto_principal ? Storage::url($n->foto_principal) : asset('images/default.jpg')),
                         imagenes: [@foreach ($n->imagenes as $img) @json(Storage::url($img->imagen)), @endforeach],
                         lat: {{ $n->latitud }},
-                        lng: {{ $n->longitud }}
+                        lng: {{ $n->longitud }},
+                        distKm: Math.round(haversine(-21.153729, -67.165680, {{ $n->latitud }}, {{ $n->longitud }}) * 10) / 10
                     },
                 @endif
             @endforeach
-        ];
+        ].filter(function(n) { return n.distKm <= 2; });
 
         function buildOwlCarousel(n, context, height) {
             height = height || 160;
@@ -307,10 +327,15 @@
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(pos) {
-                L.marker([pos.coords.latitude, pos.coords.longitude])
-                    .addTo(mapa)
-                    .bindPopup('Tu ubicación')
-                    .openPopup();
+                var userLat = pos.coords.latitude;
+                var userLng = pos.coords.longitude;
+                var dist = haversine(-21.153729, -67.165680, userLat, userLng);
+                var marker = L.marker([userLat, userLng]).addTo(mapa);
+                if (dist <= 2) {
+                    marker.bindPopup('<strong>Tu ubicación</strong><br><small>Dentro del área de cobertura</small>').openPopup();
+                } else {
+                    marker.bindPopup('<strong>Tu ubicación</strong><br><small style="color:#e53935;">Fuera del área de cobertura (a ' + dist.toFixed(1) + ' km)</small>').openPopup();
+                }
             });
         }
     </script>
