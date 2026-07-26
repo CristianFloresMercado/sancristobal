@@ -153,6 +153,14 @@ class TouristController extends Controller
 
         $tourist->delete();
 
+        if ($tourist->exists) {
+            return response()->json(['message' => 'No se pudo eliminar el sitio turístico.'], 500);
+        }
+
+        if (request()->expectsJson()) {
+            return response()->json(['message' => 'El sitio turístico fue eliminado.']);
+        }
+
         session()->flash('swal', [
             'icon' => 'success',
             'title' => '¡Eliminado!',

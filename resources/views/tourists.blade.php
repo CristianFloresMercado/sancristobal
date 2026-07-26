@@ -176,9 +176,6 @@
         </div>
     </section>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
     <script>
         var userLat = null;
         var userLng = null;
