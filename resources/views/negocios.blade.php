@@ -182,10 +182,13 @@
 
             marker.bindTooltip('<strong>' + n.nombre + '</strong>', { permanent: true, direction: 'top', offset: [0, -10], className: 'negocio-label' });
 
-            let popupHtml = '<div style="width:200px;" class="p-2">' +
+            const descShort = n.descripcion.length > 80 ? n.descripcion.substring(0, 80) + '...' : n.descripcion;
+
+            let popupHtml = '<div style="width:220px;" class="p-2">' +
                 '<h6 class="fw-bold mb-1">' + n.nombre + '</h6>' +
-                '<small class="text-muted"><i class="la la-tag me-1"></i>' + n.categoria + '</small>' +
-                '<button class="btn btn-sm w-100 rounded-pill fw-semibold mt-2" style="background:#1a237e;color:#fff;" onclick="openModal(' + n.id + ')">Ver más</button>' +
+                '<small class="text-muted d-block mb-1"><i class="la la-tag me-1"></i>' + n.categoria + '</small>' +
+                (descShort ? '<p class="small text-muted mb-2">' + descShort + '</p>' : '') +
+                '<button class="btn btn-sm w-100 rounded-pill fw-semibold" style="background:#1a237e;color:#fff;" onclick="openModal(' + n.id + ')">Ver más</button>' +
                 '</div>';
 
             marker.bindPopup(popupHtml);
@@ -286,8 +289,8 @@
 
             document.getElementById('modalBody').innerHTML =
                 '<div class="row g-0">' +
-                    '<div class="col-md-7">' +
-                        '<div class="position-relative">' +
+                    '<div class="col-md-7 p-3">' +
+                        '<div class="position-relative rounded-3 overflow-hidden">' +
                             modalCarouselHtml +
                             '<span class="position-absolute top-0 end-0 badge rounded-pill m-3" style="background:#1a237e;color:#fff;">' + modalFotoCount + ' foto' + (modalFotoCount > 1 ? 's' : '') + '</span>' +
                         '</div>' +
