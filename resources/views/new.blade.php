@@ -226,23 +226,52 @@
                             <p style="font-size:1rem;line-height:1.8;color:#374151;">{!! nl2br(e($noticias->resumen)) !!}</p>
                             @if ($noticias->video_link)
                                 @php
-                                    $isFacebook = Str::contains($noticias->video_link, ['facebook.com', 'fb.com']);
+                                    $url = $noticias->video_link;
+                                    $isFacebook = Str::contains($url, ['facebook.com', 'fb.com']);
+                                    $isTikTok = Str::contains($url, ['tiktok.com']);
+                                    $isInstagram = Str::contains($url, ['instagram.com']);
+                                    $isYouTube = Str::contains($url, ['youtube.com/watch', 'youtu.be/']);
+                                    $isVimeo = Str::contains($url, ['vimeo.com/']);
                                 @endphp
+
                                 @if ($isFacebook)
                                     <div class="mt-4 p-4 rounded-3 text-center" style="background:#f0f4ff;border:1px solid #d0daf0;">
                                         <i class="la la-facebook text-primary" style="font-size:2.5rem;"></i>
                                         <p class="mt-2 mb-3 fw-semibold" style="color:#1a237e;">Este video está en Facebook</p>
-                                        <a href="{{ $noticias->video_link }}" target="_blank" class="news-btn news-btn-primary">
+                                        <a href="{{ $url }}" target="_blank" class="news-btn news-btn-primary">
                                             <i class="la la-facebook"></i> Ver en Facebook
+                                        </a>
+                                    </div>
+                                @elseif ($isTikTok)
+                                    <div class="mt-4 p-4 rounded-3 text-center" style="background:#f0f4ff;border:1px solid #d0daf0;">
+                                        <i class="la la-music" style="font-size:2.5rem;color:#000;"></i>
+                                        <p class="mt-2 mb-3 fw-semibold" style="color:#1a237e;">Este video está en TikTok</p>
+                                        <a href="{{ $url }}" target="_blank" class="news-btn" style="background:#000;color:#fff;">
+                                            <i class="la la-music"></i> Ver en TikTok
+                                        </a>
+                                    </div>
+                                @elseif ($isInstagram)
+                                    <div class="mt-4 p-4 rounded-3 text-center" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border:1px solid #d0daf0;">
+                                        <i class="la la-instagram" style="font-size:2.5rem;color:#fff;"></i>
+                                        <p class="mt-2 mb-3 fw-semibold" style="color:#fff;">Este video está en Instagram</p>
+                                        <a href="{{ $url }}" target="_blank" class="news-btn" style="background:#fff;color:#dc2743;">
+                                            <i class="la la-instagram"></i> Ver en Instagram
                                         </a>
                                     </div>
                                 @else
                                     <div class="ratio ratio-16x9 mt-4 rounded-3 overflow-hidden">
                                         @php
-                                            $embedUrl = $noticias->video_link;
-                                            if (Str::contains($noticias->video_link, 'youtube.com/watch')) { parse_str(parse_url($noticias->video_link, PHP_URL_QUERY), $params); $embedUrl = 'https://www.youtube.com/embed/' . ($params['v'] ?? ''); }
-                                            elseif (Str::contains($noticias->video_link, 'youtu.be/')) { $embedUrl = 'https://www.youtube.com/embed/' . Str::after($noticias->video_link, 'youtu.be/'); }
-                                            elseif (Str::contains($noticias->video_link, 'vimeo.com/')) { $embedUrl = 'https://player.vimeo.com/video/' . Str::after($noticias->video_link, 'vimeo.com/'); }
+                                            $embedUrl = $url;
+                                            if ($isYouTube) {
+                                                if (Str::contains($url, 'youtube.com/watch')) {
+                                                    parse_str(parse_url($url, PHP_URL_QUERY), $params);
+                                                    $embedUrl = 'https://www.youtube.com/embed/' . ($params['v'] ?? '');
+                                                } else {
+                                                    $embedUrl = 'https://www.youtube.com/embed/' . Str::after($url, 'youtu.be/');
+                                                }
+                                            } elseif ($isVimeo) {
+                                                $embedUrl = 'https://player.vimeo.com/video/' . Str::after($url, 'vimeo.com/');
+                                            }
                                         @endphp
                                         <iframe src="{{ $embedUrl }}" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe>
                                     </div>
