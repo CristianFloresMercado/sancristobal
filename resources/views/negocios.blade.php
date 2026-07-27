@@ -182,27 +182,15 @@
 
             marker.bindTooltip('<strong>' + n.nombre + '</strong>', { permanent: true, direction: 'top', offset: [0, -10], className: 'negocio-label' });
 
-            const descShort = n.descripcion.length > 100 ? n.descripcion.substring(0, 100) + '...' : n.descripcion;
-
-            var fotoCount = 1 + (n.imagenes ? n.imagenes.length : 0);
-            var popupCarouselId = 'owl_' + n.id + '_popup';
-
-            let popupHtml = '<div style="width:220px;">' +
-                buildOwlCarousel(n, 'popup', 140) +
-                '<div class="p-2">' +
+            let popupHtml = '<div style="width:200px;" class="p-2">' +
                 '<h6 class="fw-bold mb-1">' + n.nombre + '</h6>' +
-                '<small class="text-muted">' + n.categoria + '</small>' +
-                '<p class="small mt-1 mb-2">' + descShort + '</p>' +
-                '<button class="btn btn-sm w-100 rounded-pill fw-semibold" style="background:#1a237e;color:#fff;" onclick="openModal(' + n.id + ')">Ver más</button>' +
-                '</div></div>';
+                '<small class="text-muted"><i class="la la-tag me-1"></i>' + n.categoria + '</small>' +
+                '<button class="btn btn-sm w-100 rounded-pill fw-semibold mt-2" style="background:#1a237e;color:#fff;" onclick="openModal(' + n.id + ')">Ver más</button>' +
+                '</div>';
 
             marker.bindPopup(popupHtml);
 
-            marker.on('popupopen', function() {
-                setTimeout(function() { initOwl(popupCarouselId, fotoCount); }, 100);
-            });
-
-            allMarkers.push({ data: n, marker: marker, fotoCount: fotoCount });
+            allMarkers.push({ data: n, marker: marker });
         });
 
         function renderList(filter) {
