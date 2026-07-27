@@ -194,24 +194,28 @@
                             $hasCarousel = $allImages->count() > 1;
                         @endphp
                         @if ($hasCarousel)
-                            <div id="carouselNoticia{{ $noticias->id }}" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-indicators">
-                                    @foreach ($allImages as $index => $img)
-                                        <button type="button" data-bs-target="#carouselNoticia{{ $noticias->id }}" data-bs-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}" style="background-color:#0d47a1;"></button>
-                                    @endforeach
+                            <div class="p-3">
+                                <div id="carouselNoticia{{ $noticias->id }}" class="carousel slide rounded-3 overflow-hidden" data-bs-ride="carousel">
+                                    <div class="carousel-indicators">
+                                        @foreach ($allImages as $index => $img)
+                                            <button type="button" data-bs-target="#carouselNoticia{{ $noticias->id }}" data-bs-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}" style="background-color:#0d47a1;"></button>
+                                        @endforeach
+                                    </div>
+                                    <div class="carousel-inner">
+                                        @foreach ($allImages as $index => $img)
+                                            <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                                <img src="{{ $img['src'] }}" class="d-block w-100" style="max-height:400px;object-fit:cover;" alt="{{ $img['alt'] }}">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselNoticia{{ $noticias->id }}" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselNoticia{{ $noticias->id }}" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
                                 </div>
-                                <div class="carousel-inner">
-                                    @foreach ($allImages as $index => $img)
-                                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                            <img src="{{ $img['src'] }}" class="d-block w-100" style="max-height:450px;object-fit:cover;" alt="{{ $img['alt'] }}">
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselNoticia{{ $noticias->id }}" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselNoticia{{ $noticias->id }}" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
                             </div>
                         @elseif ($allImages->count() === 1)
-                            <img src="{{ $allImages->first()['src'] }}" class="d-block w-100" style="max-height:450px;object-fit:cover;" alt="{{ $allImages->first()['alt'] }}">
+                            <div class="p-3">
+                                <img src="{{ $allImages->first()['src'] }}" class="d-block w-100 rounded-3" style="max-height:400px;object-fit:cover;" alt="{{ $allImages->first()['alt'] }}">
+                            </div>
                         @endif
                         <div class="p-4">
                             <div class="d-flex align-items-center flex-wrap gap-3 mb-3" style="font-size:0.85rem;color:#6b7280;">
@@ -221,15 +225,28 @@
                             </div>
                             <p style="font-size:1rem;line-height:1.8;color:#374151;">{!! nl2br(e($noticias->resumen)) !!}</p>
                             @if ($noticias->video_link)
-                                <div class="ratio ratio-16x9 mt-4 rounded-3 overflow-hidden">
-                                    @php
-                                        $embedUrl = $noticias->video_link;
-                                        if (Str::contains($noticias->video_link, 'youtube.com/watch')) { parse_str(parse_url($noticias->video_link, PHP_URL_QUERY), $params); $embedUrl = 'https://www.youtube.com/embed/' . ($params['v'] ?? ''); }
-                                        elseif (Str::contains($noticias->video_link, 'youtu.be/')) { $embedUrl = 'https://www.youtube.com/embed/' . Str::after($noticias->video_link, 'youtu.be/'); }
-                                        elseif (Str::contains($noticias->video_link, 'vimeo.com/')) { $embedUrl = 'https://player.vimeo.com/video/' . Str::after($noticias->video_link, 'vimeo.com/'); }
-                                    @endphp
-                                    <iframe src="{{ $embedUrl }}" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe>
-                                </div>
+                                @php
+                                    $isFacebook = Str::contains($noticias->video_link, ['facebook.com', 'fb.com']);
+                                @endphp
+                                @if ($isFacebook)
+                                    <div class="mt-4 p-4 rounded-3 text-center" style="background:#f0f4ff;border:1px solid #d0daf0;">
+                                        <i class="la la-facebook text-primary" style="font-size:2.5rem;"></i>
+                                        <p class="mt-2 mb-3 fw-semibold" style="color:#1a237e;">Este video está en Facebook</p>
+                                        <a href="{{ $noticias->video_link }}" target="_blank" class="news-btn news-btn-primary">
+                                            <i class="la la-facebook"></i> Ver en Facebook
+                                        </a>
+                                    </div>
+                                @else
+                                    <div class="ratio ratio-16x9 mt-4 rounded-3 overflow-hidden">
+                                        @php
+                                            $embedUrl = $noticias->video_link;
+                                            if (Str::contains($noticias->video_link, 'youtube.com/watch')) { parse_str(parse_url($noticias->video_link, PHP_URL_QUERY), $params); $embedUrl = 'https://www.youtube.com/embed/' . ($params['v'] ?? ''); }
+                                            elseif (Str::contains($noticias->video_link, 'youtu.be/')) { $embedUrl = 'https://www.youtube.com/embed/' . Str::after($noticias->video_link, 'youtu.be/'); }
+                                            elseif (Str::contains($noticias->video_link, 'vimeo.com/')) { $embedUrl = 'https://player.vimeo.com/video/' . Str::after($noticias->video_link, 'vimeo.com/'); }
+                                        @endphp
+                                        <iframe src="{{ $embedUrl }}" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe>
+                                    </div>
+                                @endif
                             @endif
                         </div>
                     </div>
