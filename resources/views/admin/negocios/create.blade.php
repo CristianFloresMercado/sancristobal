@@ -222,33 +222,50 @@
         </div>
     </div>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
     <script>
-        const mapa = L.map('mapa', { maxZoom: 17, minZoom: 14 }).setView([-21.154317257395107, -67.16457366943361], 16);
+        function initMapa() {
+            if (typeof L === 'undefined' || !document.getElementById('mapa')) return false;
 
-        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'Tiles © Esri',
-            maxZoom: 17,
-        }).addTo(mapa);
+            const mapa = L.map('mapa', { maxZoom: 17, minZoom: 14 }).setView([-21.153729, -67.165680], 16);
 
-        let marcador = L.marker([-21.154317257395107, -67.16457366943361]).addTo(mapa);
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: '',
+                maxZoom: 17,
+            }).addTo(mapa);
 
-        mapa.on('click', function(e) {
-            const lat = e.latlng.lat;
-            const lng = e.latlng.lng;
+            let marcador = L.marker([-21.153729, -67.165680]).addTo(mapa);
 
-            document.getElementById('latitud').value = lat;
-            document.getElementById('longitud').value = lng;
+            mapa.on('click', function(e) {
+                const lat = e.latlng.lat;
+                const lng = e.latlng.lng;
 
-            if (marcador) { mapa.removeLayer(marcador); }
+                document.getElementById('latitud').value = lat;
+                document.getElementById('longitud').value = lng;
 
-            marcador = L.marker([lat, lng])
-                .addTo(mapa)
-                .bindPopup('Ubicación seleccionada')
-                .openPopup();
-        });
+                if (marcador) { mapa.removeLayer(marcador); }
+
+                marcador = L.marker([lat, lng])
+                    .addTo(mapa)
+                    .bindPopup('Ubicación seleccionada')
+                    .openPopup();
+            });
+
+            setTimeout(function() { mapa.invalidateSize(); }, 300);
+            return true;
+        }
+
+        function tryInitMapa(attempts) {
+            if (initMapa()) return;
+            if (attempts < 20) {
+                setTimeout(function() { tryInitMapa(attempts + 1); }, 250);
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() { tryInitMapa(0); });
+        } else {
+            tryInitMapa(0);
+        }
     </script>
 
     <script>

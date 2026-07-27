@@ -135,21 +135,18 @@
         </div>
     </div>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
     <script>
         function initMapa() {
-            if (typeof L === 'undefined' || !document.getElementById('mapa')) return;
+            if (typeof L === 'undefined' || !document.getElementById('mapa')) return false;
 
-            const mapa = L.map('mapa', { maxZoom: 17, minZoom: 14 }).setView([-21.154317257395107, -67.16457366943361], 16);
+            const mapa = L.map('mapa', { maxZoom: 17, minZoom: 14 }).setView([-21.153729, -67.165680], 16);
 
             L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'Tiles © Esri',
+                attribution: '',
                 maxZoom: 17,
             }).addTo(mapa);
 
-            let marcador = L.marker([-21.154317257395107, -67.16457366943361]).addTo(mapa);
+            let marcador = L.marker([-21.153729, -67.165680]).addTo(mapa);
 
             mapa.on('click', function(e) {
                 const lat = e.latlng.lat;
@@ -166,13 +163,21 @@
                     .openPopup();
             });
 
-            setTimeout(function() { mapa.invalidateSize(); }, 200);
+            setTimeout(function() { mapa.invalidateSize(); }, 300);
+            return true;
+        }
+
+        function tryInitMapa(attempts) {
+            if (initMapa()) return;
+            if (attempts < 20) {
+                setTimeout(function() { tryInitMapa(attempts + 1); }, 250);
+            }
         }
 
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initMapa);
+            document.addEventListener('DOMContentLoaded', function() { tryInitMapa(0); });
         } else {
-            initMapa();
+            tryInitMapa(0);
         }
     </script>
 
