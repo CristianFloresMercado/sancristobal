@@ -316,19 +316,44 @@
             });
         }
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(pos) {
-                var userLat = pos.coords.latitude;
-                var userLng = pos.coords.longitude;
-                var dist = haversine(-21.153729, -67.165680, userLat, userLng);
-                var marker = L.marker([userLat, userLng]).addTo(mapa);
-                if (dist <= 2) {
-                    marker.bindPopup('<strong>Tu ubicación</strong><br><small>Dentro del área de cobertura</small>').openPopup();
-                } else {
-                    marker.bindPopup('<strong>Tu ubicación</strong><br><small style="color:#e53935;">Fuera del área de cobertura (a ' + dist.toFixed(1) + ' km)</small>').openPopup();
+        var userLocationBtn = L.control({ position: 'topright' });
+        userLocationBtn.onAdd = function() {
+            var btn = L.DomUtil.create('button', '');
+            btn.innerHTML = '<i class="la la-crosshairs" style="font-size:18px;"></i>';
+            btn.title = 'Mi ubicación';
+            btn.style.cssText = 'background:#fff;width:36px;height:36px;border:none;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.25);cursor:pointer;display:flex;align-items:center;justify-content:center;';
+            btn.onmouseover = function() { this.style.background='#e8eaf6'; };
+            btn.onmouseout = function() { this.style.background='#fff'; };
+            L.DomEvent.disableClickPropagation(btn);
+            btn.addEventListener('click', function() {
+                if (!navigator.geolocation) {
+                    alert('Tu navegador no soporta geolocalización.');
+                    return;
                 }
+                btn.disabled = true;
+                btn.innerHTML = '<i class="la la-spinner la-spin" style="font-size:18px;"></i>';
+                navigator.geolocation.getCurrentPosition(function(pos) {
+                    var userLat = pos.coords.latitude;
+                    var userLng = pos.coords.longitude;
+                    var dist = haversine(-21.153729, -67.165680, userLat, userLng);
+                    var marker = L.marker([userLat, userLng]).addTo(mapa);
+                    if (dist <= 2) {
+                        marker.bindPopup('<strong>Tu ubicación</strong><br><small>Dentro del área de cobertura</small>').openPopup();
+                    } else {
+                        marker.bindPopup('<strong>Tu ubicación</strong><br><small style="color:#e53935;">Fuera del área de cobertura (a ' + dist.toFixed(1) + ' km)</small>').openPopup();
+                    }
+                    mapa.setView([userLat, userLng], 16);
+                    btn.innerHTML = '<i class="la la-crosshairs" style="font-size:18px;"></i>';
+                    btn.disabled = false;
+                }, function() {
+                    alert('No se pudo obtener tu ubicación. Activa el GPS e intenta de nuevo.');
+                    btn.innerHTML = '<i class="la la-crosshairs" style="font-size:18px;"></i>';
+                    btn.disabled = false;
+                });
             });
-        }
+            return btn;
+        };
+        userLocationBtn.addTo(mapa);
     </script>
 
     <style>
